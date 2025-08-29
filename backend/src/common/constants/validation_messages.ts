@@ -1,33 +1,33 @@
-export const VALIDATION_MESSAGES = {
+export const ValidationMessage = {
   // Username
-  USERNAME_REQUIRED: 'Username không được để trống',
-  USERNAME_INVALID: 'Username phải là chuỗi ký tự',
-  USERNAME_MIN: 'Username phải có ít nhất 3 ký tự',
-  USERNAME_MAX: 'Username không quá 20 ký tự',
+  USERNAME_REQUIRED: 'validation.username_required',
+  USERNAME_INVALID: 'validation.username_invalid',
+  USERNAME_MIN: 'validation.username_min',
+  USERNAME_MAX: 'validation.username_max',
 
-  // Fullname
-  FULLNAME_REQUIRED: 'FullName không được để trống',
-  FULLNAME_INVALID: 'FullName phải là chuỗi ký tự',
-  FULLNAME_MIN: 'FullName phải có ít nhất 2 ký tự',
-  FULLNAME_MAX: 'FullName không quá 50 ký tự',
+  // Full name
+  FULLNAME_REQUIRED: 'validation.fullname_required',
+  FULLNAME_INVALID: 'validation.fullname_invalid',
+  FULLNAME_MIN: 'validation.fullname_min',
+  FULLNAME_MAX: 'validation.fullname_max',
 
   // Password
-  PASSWORD_REQUIRED: 'Password không được để trống',
-  PASSWORD_INVALID: 'Password phải là chuỗi ký tự',
-  PASSWORD_MIN: 'Password phải có ít nhất 6 ký tự',
+  PASSWORD_REQUIRED: 'validation.password_required',
+  PASSWORD_INVALID: 'validation.password_invalid',
+  PASSWORD_MIN: 'validation.password_min',
 
   // Email
-  EMAIL_REQUIRED: 'Email không được để trống',
-  EMAIL_INVALID: 'Email không hợp lệ',
+  EMAIL_REQUIRED: 'validation.email_required',
+  EMAIL_INVALID: 'validation.email_invalid',
 
   // Role
-  ROLE_INVALID: 'Role phải là một trong các giá trị hợp lệ',
+  ROLE_INVALID: 'validation.role_invalid',
 
   // PenName
-  PENNAME_INVALID: 'PenName phải là chuỗi ký tự',
-  PENNAME_MAX: 'PenName không quá 50 ký tự',
+  PENNAME_INVALID: 'validation.penname_invalid',
+  PENNAME_MAX: 'validation.penname_max',
 
   // Bio
-  BIO_INVALID: 'Bio phải là chuỗi ký tự',
-  BIO_MAX: 'Bio không quá 200 ký tự',
+  BIO_INVALID: 'validation.bio_invalid',
+  BIO_MAX: 'validation.bio_max',
 };

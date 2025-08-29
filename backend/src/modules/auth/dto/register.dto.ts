@@ -1,42 +1,88 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsEmail, IsEnum, IsOptional, MinLength, MaxLength } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsEmail,
+  IsEnum,
+  IsOptional,
+  MinLength,
+  MaxLength,
+} from 'class-validator';
+import { i18nValidationMessage } from 'nestjs-i18n';
 import { UserRole } from '@/modules/users/entities/user.entity';
-import { VALIDATION_MESSAGES } from '@/common/constants/validation_messages';
-import { VALIDATION_RULES } from '@/common/constants/validation_rules';
+import { ValidationRules } from '@/common/constants/validation_rules';
+import { ValidationMessage } from '@/common/constants/validation_messages';
 
 export class RegisterDto {
   @ApiProperty({
     example: 'tohoai123',
     description: 'Tên đăng nhập của người dùng (không được trùng)',
   })
-  @IsNotEmpty({ message: VALIDATION_MESSAGES.USERNAME_REQUIRED })
-  @IsString({ message: VALIDATION_MESSAGES.USERNAME_INVALID })
-  @MinLength(VALIDATION_RULES.USERNAME_MIN_LENGTH, { message: VALIDATION_MESSAGES.USERNAME_MIN })
-  @MaxLength(VALIDATION_RULES.USERNAME_MAX_LENGTH, { message: VALIDATION_MESSAGES.USERNAME_MAX })
+  @IsNotEmpty({
+    message: i18nValidationMessage(ValidationMessage.USERNAME_REQUIRED),
+  })
+  @IsString({
+    message: i18nValidationMessage(ValidationMessage.USERNAME_INVALID),
+  })
+  @MinLength(ValidationRules.USERNAME_MIN_LENGTH, {
+    message: i18nValidationMessage(ValidationMessage.USERNAME_MIN, {
+      args: { min: ValidationRules.USERNAME_MIN_LENGTH },
+    }),
+  })
+  @MaxLength(ValidationRules.USERNAME_MAX_LENGTH, {
+    message: i18nValidationMessage(ValidationMessage.USERNAME_MAX, {
+      args: { max: ValidationRules.USERNAME_MAX_LENGTH },
+    }),
+  })
   username: string;
 
   @ApiProperty({
     example: 'Tô Hoài',
     description: 'Họ và tên đầy đủ của người dùng.',
   })
-  @IsNotEmpty({ message: VALIDATION_MESSAGES.FULLNAME_REQUIRED })
-  @IsString({ message: VALIDATION_MESSAGES.FULLNAME_INVALID })
-  @MinLength(VALIDATION_RULES.FULLNAME_MIN_LENGTH, { message: VALIDATION_MESSAGES.FULLNAME_MIN })
-  @MaxLength(VALIDATION_RULES.FULLNAME_MAX_LENGTH, { message: VALIDATION_MESSAGES.FULLNAME_MAX })
+  @IsNotEmpty({
+    message: i18nValidationMessage(ValidationMessage.FULLNAME_REQUIRED),
+  })
+  @IsString({
+    message: i18nValidationMessage(ValidationMessage.FULLNAME_INVALID),
+  })
+  @MinLength(ValidationRules.FULLNAME_MIN_LENGTH, {
+    message: i18nValidationMessage(ValidationMessage.FULLNAME_MIN, {
+      args: { min: ValidationRules.FULLNAME_MIN_LENGTH },
+    }),
+  })
+  @MaxLength(ValidationRules.FULLNAME_MAX_LENGTH, {
+    message: i18nValidationMessage(ValidationMessage.FULLNAME_MAX, {
+      args: { max: ValidationRules.FULLNAME_MAX_LENGTH },
+    }),
+  })
   fullName: string;
 
   @ApiProperty({ example: 'tohoai@gmail.com' })
-  @IsNotEmpty({ message: VALIDATION_MESSAGES.EMAIL_REQUIRED })
-  @IsEmail({}, { message: VALIDATION_MESSAGES.EMAIL_INVALID })
+  @IsNotEmpty({
+    message: i18nValidationMessage(ValidationMessage.EMAIL_REQUIRED),
+  })
+  @IsEmail(
+    {},
+    { message: i18nValidationMessage(ValidationMessage.EMAIL_INVALID) },
+  )
   email: string;
 
   @ApiProperty({
     example: 'tohoai321',
     description: 'Mật khẩu có ít nhất 6 ký tự.',
   })
-  @IsNotEmpty({ message: VALIDATION_MESSAGES.PASSWORD_REQUIRED })
-  @IsString({ message: VALIDATION_MESSAGES.PASSWORD_INVALID })
-  @MinLength(VALIDATION_RULES.PASSWORD_MIN_LENGTH, { message: VALIDATION_MESSAGES.PASSWORD_MIN })
+  @IsNotEmpty({
+    message: i18nValidationMessage(ValidationMessage.PASSWORD_REQUIRED),
+  })
+  @IsString({
+    message: i18nValidationMessage(ValidationMessage.PASSWORD_INVALID),
+  })
+  @MinLength(ValidationRules.PASSWORD_MIN_LENGTH, {
+    message: i18nValidationMessage(ValidationMessage.PASSWORD_MIN, {
+      args: { min: ValidationRules.PASSWORD_MIN_LENGTH },
+    }),
+  })
   password: string;
 
   @ApiProperty({
@@ -44,7 +90,9 @@ export class RegisterDto {
     example: UserRole.USER,
     description: 'Vai trò của người dùng (ví dụ: ADMIN, AUTHOR, USER).',
   })
-  @IsEnum(UserRole, { message: VALIDATION_MESSAGES.ROLE_INVALID })
+  @IsEnum(UserRole, {
+    message: i18nValidationMessage(ValidationMessage.ROLE_INVALID),
+  })
   role: UserRole;
 
   @ApiProperty({
@@ -53,8 +101,14 @@ export class RegisterDto {
     required: false,
   })
   @IsOptional()
-  @IsString({ message: VALIDATION_MESSAGES.PENNAME_INVALID })
-  @MaxLength(VALIDATION_RULES.PENNAME_MAX_LENGTH, { message: VALIDATION_MESSAGES.PENNAME_MAX })
+  @IsString({
+    message: i18nValidationMessage(ValidationMessage.PENNAME_INVALID),
+  })
+  @MaxLength(ValidationRules.PENNAME_MAX_LENGTH, {
+    message: i18nValidationMessage(ValidationMessage.PENNAME_MAX, {
+      args: { max: ValidationRules.PENNAME_MAX_LENGTH },
+    }),
+  })
   penName?: string;
 
   @ApiProperty({
@@ -63,7 +117,11 @@ export class RegisterDto {
     required: false,
   })
   @IsOptional()
-  @IsString({ message: VALIDATION_MESSAGES.BIO_INVALID })
-  @MaxLength(VALIDATION_RULES.BIO_MAX_LENGTH, { message: VALIDATION_MESSAGES.BIO_MAX })
+  @IsString({ message: i18nValidationMessage(ValidationMessage.BIO_INVALID) })
+  @MaxLength(ValidationRules.BIO_MAX_LENGTH, {
+    message: i18nValidationMessage(ValidationMessage.BIO_MAX, {
+      args: { max: ValidationRules.BIO_MAX_LENGTH },
+    }),
+  })
   bio?: string;
 }

@@ -1,0 +1,23 @@
+{
+  "register_title": "Đăng ký",
+  "username": "Tên đăng nhập",
+  "username_required": "Vui lòng nhập tên đăng nhập",
+  "email": "Email",
+  "email_required": "Vui lòng nhập email",
+  "email_invalid": "Email không hợp lệ",
+  "full_name": "Họ và tên",
+  "full_name_required": "Vui lòng nhập họ và tên",
+  "password": "Mật khẩu",
+  "password_required": "Vui lòng nhập mật khẩu",
+  "role": "Vai trò",
+  "role_required": "Vui lòng chọn vai trò",
+  "user": "Đọc Giả",
+  "author": "Tác giả",
+  "pen_name": "Bút danh",
+  "bio": "Tiểu sử",
+  "register": "Đăng ký",
+  "already_have_account": "Bạn đã có tài khoản?",
+  "login": "Đăng nhập",
+
+  "register_success": "Đăng ký thành công!"
+}

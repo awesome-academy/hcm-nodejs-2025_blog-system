@@ -7,49 +7,65 @@ import { RegisterDto } from './dto/register.dto';
 import { UserSerializer } from '../users/serializers/user.serializer';
 import * as bcrypt from 'bcrypt';
 import { plainToInstance } from 'class-transformer';
+import { I18nService } from 'nestjs-i18n';
+import { RequestI18nContextService } from '@/common/context/i18nContext.service';
+import { BaseI18nService } from '../shared/baseI18n.service';
 
 @Injectable()
-export class AuthService {
+export class AuthService extends BaseI18nService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     @InjectRepository(Author)
     private readonly authorRepository: Repository<Author>,
-  ) {}
+    i18n: I18nService,
+    context: RequestI18nContextService,
+  ) {
+    super(i18n, context);
+  }
 
   async register(data: RegisterDto): Promise<UserSerializer> {
-    // Kiểm tra username hoặc email đã tồn tại chưa
-    const existingUser = await this.userRepository.findOne({
-      where: [{ username: data.username }, { email: data.email }],
-    });
-    if (existingUser) {
-      throw new BadRequestException('Username hoặc email đã được sử dụng');
-    }
-
-    // Tạo người dùng mới
-    const newUser = this.userRepository.create({
-      username: data.username,
-      fullName: data.fullName,
-      email: data.email,
-      passwordHash: await this.hashPassword(data.password),
-      role: data.role,
-    });
-    await this.userRepository.save(newUser);
-
-    // Nếu user là AUTHOR thì tạo profile tác giả kèm liên kết
-    if (data.role === UserRole.AUTHOR) {
-      const newAuthor = this.authorRepository.create({
-        penName: data.penName,
-        bio: data.bio,
-        user: newUser,
+    try {
+      // Kiểm tra username hoặc email đã tồn tại chưa
+      const existingUser = await this.userRepository.findOne({
+        where: [{ username: data.username }, { email: data.email }],
       });
-      await this.authorRepository.save(newAuthor);
-    }
+      if (existingUser) {
+        throw new BadRequestException(
+          await this.t('auth.username_or_email_exists'),
+        );
+      }
 
-    // Chuyển đổi entity thành serializer để trả về client
-    return plainToInstance(UserSerializer, newUser, {
-      excludeExtraneousValues: true,
-    });
+      // Tạo người dùng mới
+      const newUser = this.userRepository.create({
+        username: data.username,
+        fullName: data.fullName,
+        email: data.email,
+        passwordHash: await this.hashPassword(data.password),
+        role: data.role,
+      });
+      await this.userRepository.save(newUser);
+
+      // Nếu user là AUTHOR thì tạo profile tác giả kèm liên kết
+      if (data.role === UserRole.AUTHOR) {
+        const newAuthor = this.authorRepository.create({
+          penName: data.penName,
+          bio: data.bio,
+          user: newUser,
+        });
+        await this.authorRepository.save(newAuthor);
+      }
+
+      // Chuyển đổi entity thành serializer để trả về client
+      return plainToInstance(UserSerializer, newUser, {
+        excludeExtraneousValues: true,
+      });
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw error;
+      }
+      throw new BadRequestException(await this.t('auth.register_failed'));
+    }
   }
 
   // Hàm băm mật khẩu trước khi lưu vào database

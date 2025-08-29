@@ -1,0 +1,26 @@
+{
+  "username_required": "Username is required",
+  "username_invalid": "Username must be a string",
+  "username_min": "Username must be at least {args.min} characters",
+  "username_max": "Username must not exceed {args.max} characters",
+
+  "fullname_required": "Full name is required",
+  "fullname_invalid": "Full name must be a string",
+  "fullname_min": "Full name must be at least {args.min} characters",
+  "fullname_max": "Full name must not exceed {args.max} characters",
+
+  "password_required": "Password is required",
+  "password_invalid": "Password must be a string",
+  "password_min": "Password must be at least {args.min} characters",
+
+  "email_required": "Email is required",
+  "email_invalid": "Email is invalid",
+
+  "role_invalid": "Role must be one of the allowed values",
+
+  "penname_invalid": "Pen name must be a string",
+  "penname_max": "Pen name must not exceed {args.max} characters",
+
+  "bio_invalid": "Bio must be a string",
+  "bio_max": "Bio must not exceed {args.max} characters"
+}
