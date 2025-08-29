@@ -6,6 +6,9 @@ import { Follower } from '@/modules/followers/entities/follower.entity';
 
 @Entity('authors')
 export class Author extends AbstractEntity {
+  @Column({ unique: true })
+  penName: string;
+
   @Column({ type: 'text', nullable: true })
   bio: string;
 
