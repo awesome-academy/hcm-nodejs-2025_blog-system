@@ -1,4 +1,4 @@
-export const VALIDATION_RULES = {
+export const ValidationRules = {
   USERNAME_MIN_LENGTH: 3,
   USERNAME_MAX_LENGTH: 20,
   FULLNAME_MIN_LENGTH: 2,

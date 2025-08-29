@@ -1,0 +1,23 @@
+{
+  "register_title": "Register",
+  "username": "Username",
+  "username_required": "Please enter your username",
+  "email": "Email",
+  "email_required": "Please enter your email",
+  "email_invalid": "Please enter a valid email",
+  "full_name": "Full name",
+  "full_name_required": "Please enter your full name",
+  "password": "Password",
+  "password_required": "Please enter your password",
+  "role": "Role",
+  "role_required": "Please select a role",
+  "user": "Reader",
+  "author": "Author",
+  "pen_name": "Pen name",
+  "bio": "Bio",
+  "register": "Register",
+  "already_have_account": "Already have an account?",
+  "login": "Login",
+
+  "register_success": "Registration successful!"
+}

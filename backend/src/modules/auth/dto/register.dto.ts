@@ -1,42 +1,42 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, IsEmail, IsEnum, IsOptional, MinLength, MaxLength } from 'class-validator';
 import { UserRole } from '@/modules/users/entities/user.entity';
-import { VALIDATION_MESSAGES } from '@/common/constants/validation_messages';
-import { VALIDATION_RULES } from '@/common/constants/validation_rules';
+import { ValidationMessage } from '@/common/constants/validation_messages';
+import { ValidationRules} from '@/common/constants/validation_rules';
 
 export class RegisterDto {
   @ApiProperty({
     example: 'tohoai123',
     description: 'Tên đăng nhập của người dùng (không được trùng)',
   })
-  @IsNotEmpty({ message: VALIDATION_MESSAGES.USERNAME_REQUIRED })
-  @IsString({ message: VALIDATION_MESSAGES.USERNAME_INVALID })
-  @MinLength(VALIDATION_RULES.USERNAME_MIN_LENGTH, { message: VALIDATION_MESSAGES.USERNAME_MIN })
-  @MaxLength(VALIDATION_RULES.USERNAME_MAX_LENGTH, { message: VALIDATION_MESSAGES.USERNAME_MAX })
+  @IsNotEmpty({ message: ValidationMessage.USERNAME_REQUIRED })
+  @IsString({ message: ValidationMessage.USERNAME_INVALID })
+  @MinLength(ValidationRules.USERNAME_MIN_LENGTH, { message: ValidationMessage.USERNAME_MIN })
+  @MaxLength(ValidationRules.USERNAME_MAX_LENGTH, { message: ValidationMessage.USERNAME_MAX })
   username: string;
 
   @ApiProperty({
     example: 'Tô Hoài',
     description: 'Họ và tên đầy đủ của người dùng.',
   })
-  @IsNotEmpty({ message: VALIDATION_MESSAGES.FULLNAME_REQUIRED })
-  @IsString({ message: VALIDATION_MESSAGES.FULLNAME_INVALID })
-  @MinLength(VALIDATION_RULES.FULLNAME_MIN_LENGTH, { message: VALIDATION_MESSAGES.FULLNAME_MIN })
-  @MaxLength(VALIDATION_RULES.FULLNAME_MAX_LENGTH, { message: VALIDATION_MESSAGES.FULLNAME_MAX })
+  @IsNotEmpty({ message: ValidationMessage.FULLNAME_REQUIRED })
+  @IsString({ message: ValidationMessage.FULLNAME_INVALID })
+  @MinLength(ValidationRules.FULLNAME_MIN_LENGTH, { message: ValidationMessage.FULLNAME_MIN })
+  @MaxLength(ValidationRules.FULLNAME_MAX_LENGTH, { message: ValidationMessage.FULLNAME_MAX })
   fullName: string;
 
   @ApiProperty({ example: 'tohoai@gmail.com' })
-  @IsNotEmpty({ message: VALIDATION_MESSAGES.EMAIL_REQUIRED })
-  @IsEmail({}, { message: VALIDATION_MESSAGES.EMAIL_INVALID })
+  @IsNotEmpty({ message: ValidationMessage.EMAIL_REQUIRED })
+  @IsEmail({}, { message: ValidationMessage.EMAIL_INVALID })
   email: string;
 
   @ApiProperty({
     example: 'tohoai321',
     description: 'Mật khẩu có ít nhất 6 ký tự.',
   })
-  @IsNotEmpty({ message: VALIDATION_MESSAGES.PASSWORD_REQUIRED })
-  @IsString({ message: VALIDATION_MESSAGES.PASSWORD_INVALID })
-  @MinLength(VALIDATION_RULES.PASSWORD_MIN_LENGTH, { message: VALIDATION_MESSAGES.PASSWORD_MIN })
+  @IsNotEmpty({ message: ValidationMessage.PASSWORD_REQUIRED })
+  @IsString({ message: ValidationMessage.PASSWORD_INVALID })
+  @MinLength(ValidationRules.PASSWORD_MIN_LENGTH, { message: ValidationMessage.PASSWORD_MIN })
   password: string;
 
   @ApiProperty({
@@ -44,7 +44,7 @@ export class RegisterDto {
     example: UserRole.USER,
     description: 'Vai trò của người dùng (ví dụ: ADMIN, AUTHOR, USER).',
   })
-  @IsEnum(UserRole, { message: VALIDATION_MESSAGES.ROLE_INVALID })
+  @IsEnum(UserRole, { message: ValidationMessage.ROLE_INVALID })
   role: UserRole;
 
   @ApiProperty({
@@ -53,8 +53,8 @@ export class RegisterDto {
     required: false,
   })
   @IsOptional()
-  @IsString({ message: VALIDATION_MESSAGES.PENNAME_INVALID })
-  @MaxLength(VALIDATION_RULES.PENNAME_MAX_LENGTH, { message: VALIDATION_MESSAGES.PENNAME_MAX })
+  @IsString({ message: ValidationMessage.PENNAME_INVALID })
+  @MaxLength(ValidationRules.PENNAME_MAX_LENGTH, { message: ValidationMessage.PENNAME_MAX })
   penName?: string;
 
   @ApiProperty({
@@ -63,7 +63,7 @@ export class RegisterDto {
     required: false,
   })
   @IsOptional()
-  @IsString({ message: VALIDATION_MESSAGES.BIO_INVALID })
-  @MaxLength(VALIDATION_RULES.BIO_MAX_LENGTH, { message: VALIDATION_MESSAGES.BIO_MAX })
+  @IsString({ message: ValidationMessage.BIO_INVALID })
+  @MaxLength(ValidationRules.BIO_MAX_LENGTH, { message: ValidationMessage.BIO_MAX })
   bio?: string;
 }
