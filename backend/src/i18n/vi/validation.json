@@ -1,0 +1,26 @@
+{
+  "username_required": "Username không được để trống",
+  "username_invalid": "Username phải là chuỗi ký tự",
+  "username_min": "Username phải có ít nhất {args.min} ký tự",
+  "username_max": "Username không quá {args.max} ký tự",
+
+  "fullname_required": "Họ và tên không được để trống",
+  "fullname_invalid": "Họ và tên phải là chuỗi ký tự",
+  "fullname_min": "Họ và tên phải có ít nhất {args.min} ký tự",
+  "fullname_max": "Họ và tên không quá {args.max} ký tự",
+
+  "password_required": "Mật khẩu không được để trống",
+  "password_invalid": "Mật khẩu phải là chuỗi ký tự",
+  "password_min": "Mật khẩu phải có ít nhất {args.min} ký tự",
+
+  "email_required": "Email không được để trống",
+  "email_invalid": "Email không hợp lệ",
+
+  "role_invalid": "Role phải là một trong các giá trị hợp lệ",
+
+  "penname_invalid": "Tên bút phải là chuỗi ký tự",
+  "penname_max": "Tên bút không quá {args.max} ký tự",
+
+  "bio_invalid": "Bio phải là chuỗi ký tự",
+  "bio_max": "Bio không quá {args.max} ký tự"
+}

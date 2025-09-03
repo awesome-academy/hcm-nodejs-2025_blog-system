@@ -1,0 +1,12 @@
+{
+  "login_title": "Đăng nhập",
+  "username": "Tên đăng nhập",
+  "username_required": "Vui lòng nhập tên đăng nhập",
+  "password": "Mật khẩu",
+  "password_required": "Vui lòng nhập mật khẩu",
+  "login": "Đăng nhập",
+  "dont_have_account": "Chưa có tài khoản?",
+  "register": "Đăng ký",
+  "not_verified": "Chưa xác minh tài khoản?",
+  "forgot_password": "Quên mật khẩu?"
+}

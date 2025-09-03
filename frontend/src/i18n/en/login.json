@@ -1,0 +1,12 @@
+{
+  "login_title": "Login",
+  "username": "Username",
+  "username_required": "Please enter your username",
+  "password": "Password",
+  "password_required": "Please enter your password",
+  "login": "Login",
+  "dont_have_account": "Don't have an account?",
+  "register": "Register",
+  "not_verified": "Your account is not verified?",
+  "forgot_password": "Forgot password?"
+}
