@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User, UserRole } from '@/modules/users/entities/user.entity';
@@ -10,6 +14,8 @@ import { plainToInstance } from 'class-transformer';
 import { I18nService } from 'nestjs-i18n';
 import { RequestI18nContextService } from '@/common/context/i18nContext.service';
 import { BaseI18nService } from '../shared/baseI18n.service';
+import { JwtService } from '@nestjs/jwt';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService extends BaseI18nService {
@@ -20,6 +26,7 @@ export class AuthService extends BaseI18nService {
     private readonly authorRepository: Repository<Author>,
     i18n: I18nService,
     context: RequestI18nContextService,
+    private readonly jwtService: JwtService,
   ) {
     super(i18n, context);
   }
@@ -73,5 +80,42 @@ export class AuthService extends BaseI18nService {
     const bycrypt = await import('bcrypt');
     const saltRounds = 10;
     return bycrypt.hash(password, saltRounds);
+  }
+
+  async login(data: LoginDto) {
+    try {
+      const user = await this.userRepository.findOne({
+        where: { username: data.username },
+      });
+
+      if (!user) {
+        throw new UnauthorizedException(
+          await this.t('auth.user_not_found'),
+        );
+      }
+
+      const isMatch = await bcrypt.compare(data.password, user.passwordHash);
+
+      if (!isMatch) {
+        throw new UnauthorizedException(
+          await this.t('auth.password_incorrect'),
+        );
+      }
+
+      const payload = {
+        sub: user.id,
+        username: user.username,
+        role: user.role,
+      };
+
+      const token = this.jwtService.sign(payload);
+
+      return { access_token: token };
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw error;
+      }
+      throw new BadRequestException(await this.t('auth.login_failed'));
+    }
   }
 }

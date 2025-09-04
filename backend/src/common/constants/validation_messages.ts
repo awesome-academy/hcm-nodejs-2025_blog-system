@@ -4,6 +4,7 @@ export const ValidationMessage = {
   USERNAME_INVALID: 'validation.username_invalid',
   USERNAME_MIN: 'validation.username_min',
   USERNAME_MAX: 'validation.username_max',
+  LOGIN_USERNAME_REQUIRED: 'auth.login_username_required',
 
   // Full name
   FULLNAME_REQUIRED: 'validation.fullname_required',
@@ -15,6 +16,7 @@ export const ValidationMessage = {
   PASSWORD_REQUIRED: 'validation.password_required',
   PASSWORD_INVALID: 'validation.password_invalid',
   PASSWORD_MIN: 'validation.password_min',
+  LOGIN_PASSWORD_REQUIRED: 'auth.login_password_required',
 
   // Email
   EMAIL_REQUIRED: 'validation.email_required',
