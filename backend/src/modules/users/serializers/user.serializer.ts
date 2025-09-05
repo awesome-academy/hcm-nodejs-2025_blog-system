@@ -1,10 +1,12 @@
 import { Expose, Type } from 'class-transformer';
 import { AuthorSerializer } from '@/modules/authors/serializers/author.serializer';
-import { ApiProperty } from '@nestjs/swagger';
 
 export class UserSerializer {
   @Expose()
   id: number;
+
+  @Expose()
+  username: string;
 
   @Expose()
   fullName: string;
