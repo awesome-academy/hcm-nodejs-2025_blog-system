@@ -89,9 +89,7 @@ export class AuthService extends BaseI18nService {
       });
 
       if (!user) {
-        throw new UnauthorizedException(
-          await this.t('auth.user_not_found'),
-        );
+        throw new UnauthorizedException(await this.t('auth.user_not_found'));
       }
 
       const isMatch = await bcrypt.compare(data.password, user.passwordHash);
@@ -112,7 +110,7 @@ export class AuthService extends BaseI18nService {
 
       return { access_token: token };
     } catch (error) {
-      if (error instanceof BadRequestException) {
+      if (error instanceof UnauthorizedException) {
         throw error;
       }
       throw new BadRequestException(await this.t('auth.login_failed'));
