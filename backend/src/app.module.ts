@@ -20,6 +20,8 @@ import { RequestI18nContextService } from './common/context/i18nContext.service'
 import { I18N_CONFIG } from './common/constants/i18n.constant';
 
 import { AuthModule } from './modules/auth/auth.module';
+import { MailModule } from './common/jobs/mail/mail.module';
+import { PasswordResetModule } from './modules/password_reset_tokens/password_reset.module';
 
 @Module({
   imports: [
@@ -43,6 +45,8 @@ import { AuthModule } from './modules/auth/auth.module';
       ...AppDataSource.options,
     }),
     AuthModule,
+    MailModule,
+    PasswordResetModule,
   ],
   controllers: [AppController],
   providers: [

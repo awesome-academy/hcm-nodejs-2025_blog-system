@@ -1,0 +1,13 @@
+{
+  "forgot_password_title": "Forgot Password",
+  "email_placeholder": "Enter your email...",
+  "reset_button": "Reset Password",
+
+  "forgot_password_failed": "Failed to send password reset email",
+  "token_missing": "Token is missing",
+  "password_too_short": "Password must be at least 6 characters",
+  "reset_password_title": "Reset Your Password",
+  "new_password_placeholder": "Enter your new password",
+  "reset_success": "Your password has been reset successfully",
+  "reset_failed": "Failed to reset password. Please try again"
+}

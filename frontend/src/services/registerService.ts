@@ -4,7 +4,7 @@ import { handleAxiosError } from "../utils/handleError";
 
 export const register = async (data: RegisterFormData) => {
   try {
-    const response = await api.post("/auth/register", data);
+    const response = await api.post("/v1/auth/register", data);
     return response.data;
   } catch (error) {
     throw handleAxiosError(error, "auth.register_failed");
