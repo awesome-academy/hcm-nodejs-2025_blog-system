@@ -1,19 +1,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthService } from './auth.service';
+import { AuthService } from '../auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { I18nService } from 'nestjs-i18n';
 import { RequestI18nContextService } from '@/common/context/i18nContext.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from '@/modules/users/entities/user.entity';
-import { Author } from '../authors/entities/author.entity';
+import { Author } from '../../authors/entities/author.entity';
 import {
   createMockRepository,
   createMockI18nService,
   createMockRequestI18nContextService,
-} from '../../../test-utils/base-test.util';
+} from '../../../../test-utils/base-test.util';
 import { UserRole } from '@/modules/users/entities/user.entity';
-import { RegisterDto } from './dto/register.dto';
-import { LoginDto } from './dto/login.dto';
+import { RegisterDto } from '../dto/register.dto';
+import { LoginDto } from '../dto/login.dto';
 import * as bcrypt from 'bcrypt';
 
 describe('AuthService', () => {
