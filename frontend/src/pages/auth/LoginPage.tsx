@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
-import { Form, Input, Button, Card } from "antd";
+import { Form, Input, Button, Card, Modal } from "antd";
 import "../../styles/LoginPage.css";
 import { useTranslation } from "react-i18next";
-
+import ForgotPassword from "../../components/ForgotPassword";
+import { useState } from "react";
 const Login = () => {
   const { t } = useTranslation("login");
+  const [isForgotOpen, setIsForgotOpen] = useState(false);
 
   return (
     <div className="login-container">
@@ -43,12 +45,23 @@ const Login = () => {
             </span>
           </p>
           <p>
-            <span style={{ color: "#1677ff", cursor: "pointer" }}>
+            <span
+              style={{ color: "#1677ff", cursor: "pointer" }}
+              onClick={() => setIsForgotOpen(true)}
+            >
               {t("forgot_password")}
             </span>
           </p>
         </div>
       </Card>
+      <Modal
+        open={isForgotOpen}
+        onCancel={() => setIsForgotOpen(false)}
+        footer={null}
+        destroyOnClose
+      >
+        <ForgotPassword onSuccess={() => setIsForgotOpen(false)} />
+      </Modal>
     </div>
   );
 };

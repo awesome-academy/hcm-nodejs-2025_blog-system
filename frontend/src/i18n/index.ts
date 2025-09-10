@@ -6,11 +6,13 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import viRegister from "./vi/register.json";
 import viLogin from "./vi/login.json";
 import viCommon from "./vi/common.json";
+import viForgotPass from "./vi/forgotPass.json";
 
 //US
 import enRegister from "./en/register.json";
 import enLogin from "./en/login.json";
 import enCommon from "./en/common.json";
+import enForgotPass from "./en/forgotPass.json";
 
 i18n
   .use(LanguageDetector)
@@ -21,15 +23,17 @@ i18n
         register: viRegister,
         login: viLogin,
         common: viCommon,
+        forgotPass: viForgotPass,
       },
       en: {
         register: enRegister,
         login: enLogin,
         common: enCommon,
+        forgotPass: enForgotPass,
       },
     },
     fallbackLng: "vi",
-    ns: ["register", "login", "common"],
+    ns: ["register", "login", "common", "forgotPass"],
 
     defaultNS: "common",
     interpolation: {

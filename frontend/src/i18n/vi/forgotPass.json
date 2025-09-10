@@ -1,0 +1,13 @@
+{
+  "forgot_password_title": "Đặt lại mật khẩu",
+  "email_placeholder": "Nhập email...",
+  "reset_button": "Đặt lại mật khẩu",
+
+  "forgot_password_failed": "Gửi email đặt lại mật khẩu thất bại",
+  "token_missing": "Thiếu token",
+  "password_too_short": "Mật khẩu phải ít nhất 6 ký tự",
+  "reset_password_title": "Đặt lại mật khẩu",
+  "new_password_placeholder": "Nhập mật khẩu mới",
+  "reset_success": "Mật khẩu của bạn đã được đặt lại thành công",
+  "reset_failed": "Đặt lại mật khẩu thất bại. Vui lòng thử lại"
+}
