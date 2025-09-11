@@ -2,13 +2,12 @@ import { Form, Input, Button, Card, Radio } from "antd";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../../styles/RegisterPage.css";
-import LanguageSwitcher from "../../components/LanguageSwitcher";
-import { useRegister } from "../../hooks/useRegister";
+import {useAuthForm } from "../../hooks/useAuthForm";
 import { useState } from "react";
 
 const Register = () => {
   const { t } = useTranslation("register");
-  const { handleRegister } = useRegister();
+  const { handleRegister } = useAuthForm();
   const [role, setRole] = useState<"user" | "author">("user");
 
   return (
@@ -88,10 +87,6 @@ const Register = () => {
           <p>
             {t("already_have_account")} <Link to="/login">{t("login")}</Link>
           </p>
-        </div>
-
-        <div>
-          <LanguageSwitcher />
         </div>
       </Card>
     </div>

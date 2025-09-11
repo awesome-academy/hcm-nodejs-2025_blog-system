@@ -1,0 +1,12 @@
+{
+  "home": "Home",
+  "blogs": "Blogs",
+  "myPosts": "My Posts",
+  "profile": "Profile",
+  "logout": "Logout",
+  "login": "Login",
+  "register": "Register",
+
+  "manageUsers": "Manage Users",
+  "managePosts": "Manage Posts"
+}

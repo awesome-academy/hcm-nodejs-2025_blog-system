@@ -1,4 +1,5 @@
 {
   "lang_vi": "Tiếng Việt",
-  "lang_en": "Tiếng Anh"
+  "lang_en": "Tiếng Anh",
+  "auth_context_missing": "useAuthContext phải được dùng bên trong AuthProvider"
 }

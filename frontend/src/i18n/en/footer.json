@@ -1,0 +1,33 @@
+{
+  "brandDescription": "A platform for sharing knowledge and connecting a community of writing enthusiasts.",
+  "categories": {
+    "title": "Categories",
+    "marketing": "Marketing",
+    "seo": "SEO",
+    "tech": "Technology",
+    "writing": "Writing",
+    "design": "Design",
+    "business": "Business"
+  },
+  "quickLinks": {
+    "title": "Quick Links",
+    "home": "Home",
+    "featuredPosts": "Featured Posts",
+    "aboutUs": "About Us",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "contact": "Contact"
+  },
+  "newsletter": {
+    "title": "Subscribe to Newsletter",
+    "description": "Get notified about our latest articles",
+    "placeholder": "Your email",
+    "subscribe": "Subscribe"
+  },
+  "contact": {
+    "address": "227 Nguyen Van Cu, District 5, Ho Chi Minh City",
+    "phone": "+84 123 456 789",
+    "email": "hello@blogsystem.com"
+  },
+  "copyright": "© 2023 BlogSystem. All rights reserved."
+}

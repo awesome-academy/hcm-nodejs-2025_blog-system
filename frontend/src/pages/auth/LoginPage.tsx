@@ -4,14 +4,17 @@ import "../../styles/LoginPage.css";
 import { useTranslation } from "react-i18next";
 import ForgotPassword from "../../components/ForgotPassword";
 import { useState } from "react";
+import { useAuthForm } from "../../hooks/useAuthForm";
 const Login = () => {
   const { t } = useTranslation("login");
   const [isForgotOpen, setIsForgotOpen] = useState(false);
 
+  const { handleLogin } = useAuthForm();
+
   return (
     <div className="login-container">
       <Card title={t("login_title")} className="login-card">
-        <Form layout="vertical">
+        <Form layout="vertical" onFinish={handleLogin}>
           <Form.Item
             name="username"
             label={t("username")}
