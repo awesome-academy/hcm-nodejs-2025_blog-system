@@ -22,6 +22,7 @@ import { I18N_CONFIG } from './common/constants/i18n.constant';
 import { AuthModule } from './modules/auth/auth.module';
 import { MailModule } from './common/jobs/mail/mail.module';
 import { PasswordResetModule } from './modules/password_reset_tokens/password_reset.module';
+import { UserModule } from './modules/users/user.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { PasswordResetModule } from './modules/password_reset_tokens/password_re
     AuthModule,
     MailModule,
     PasswordResetModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [

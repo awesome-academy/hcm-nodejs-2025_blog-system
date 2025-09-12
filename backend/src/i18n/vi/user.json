@@ -1,3 +1,10 @@
 {
-    "user_not_found_by_email": "Không tìm thấy người dùng với email này"
+  "user_not_found_by_email": "Không tìm thấy người dùng với email này",
+  "user_not_found": "Người dùng không tồn tại",
+  "update_profile_failed": "Cập nhật thông tin người dùng thất bại",
+  "current_password_invalid": "Mật khẩu hiện tại không đúng",
+  "password_confirm_mismatch": "Mật khẩu mới và xác nhận mật khẩu không khớp",
+  "password_changed_success": "Đổi mật khẩu thành công",
+  "change_password_failed": "Đổi mật khẩu thất bại",
+  "fetch_profile_failed": "Lấy thông tin người dùng thất bại"
 }

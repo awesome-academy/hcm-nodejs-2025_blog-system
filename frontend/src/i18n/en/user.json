@@ -1,0 +1,6 @@
+{
+  "fetch_profile_failed": "Failed to fetch user profile",
+  "update_profile_failed": "Failed to update user profile",
+  "change_password_failed": "Failed to change password",
+  "update_success": "Profile updated successfully"
+}
