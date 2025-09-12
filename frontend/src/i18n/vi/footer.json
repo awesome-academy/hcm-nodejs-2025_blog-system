@@ -1,0 +1,33 @@
+{
+  "brandDescription": "Nền tảng chia sẻ kiến thức và kết nối cộng đồng những người đam mê viết lách.",
+  "categories": {
+    "title": "Danh mục",
+    "marketing": "Marketing",
+    "seo": "SEO",
+    "tech": "Công nghệ",
+    "writing": "Viết lách",
+    "design": "Design",
+    "business": "Kinh doanh"
+  },
+  "quickLinks": {
+    "title": "Liên kết nhanh",
+    "home": "Trang chủ",
+    "featuredPosts": "Bài viết nổi bật",
+    "aboutUs": "Về chúng tôi",
+    "terms": "Điều khoản sử dụng",
+    "privacy": "Chính sách bảo mật",
+    "contact": "Liên hệ"
+  },
+  "newsletter": {
+    "title": "Đăng ký nhận tin",
+    "description": "Nhận thông báo về bài viết mới nhất từ chúng tôi",
+    "placeholder": "Email của bạn",
+    "subscribe": "Đăng ký"
+  },
+  "contact": {
+    "address": "227 Nguyễn Văn Cừ, Quận 5, TP.HCM",
+    "phone": "+84 123 456 789",
+    "email": "hello@blogsystem.com"
+  },
+  "copyright": "© 2023 BlogSystem. Tất cả quyền được bảo lưu."
+}

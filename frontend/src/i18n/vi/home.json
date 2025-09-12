@@ -1,0 +1,24 @@
+{
+  "hero": {
+    "title": "Nền tảng chia sẻ kiến thức và kinh nghiệm viết lách",
+    "description": "Khám phá hàng nghìn bài viết chất lượng từ các chuyên gia hàng đầu trong nhiều lĩnh vực",
+    "searchPlaceholder": "Tìm kiếm bài viết, chủ đề hoặc tác giả...",
+    "searchBtn": "Tìm kiếm",
+    "stats": {
+      "posts": "Bài viết",
+      "authors": "Tác giả",
+      "readers": "Độc giả"
+    }
+  },
+  "categories": {
+    "title": "Danh mục bài viết",
+    "description": "Khám phá các chủ đề đa dạng từ các chuyên gia hàng đầu",
+    "postsCount": "bài viết"
+  },
+  "recentPosts": {
+    "title": "Bài viết mới nhất",
+    "description": "Cập nhật những bài viết mới nhất từ cộng đồng của chúng tôi",
+    "readMore": "Đọc thêm",
+    "viewAll": "Xem tất cả bài viết"
+  }
+}

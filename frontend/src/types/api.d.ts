@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/auth/register": {
+    "/v1/auth/register": {
         parameters: {
             query?: never;
             header?: never;
@@ -13,7 +13,55 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        post: operations["AuthController_register"];
+        post: operations["AuthController_register_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/auth/login": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["AuthController_Login_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/reset/forgot-password": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["PasswordResetController_forgotPassword_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/reset/reset-password": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["PasswordResetController_resetPassword_v1"];
         delete?: never;
         options?: never;
         head?: never;
@@ -24,6 +72,13 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        ResponseData: {
+            data: Record<string, never>;
+            statusCode: number;
+            message: string;
+            error: Record<string, never>;
+        };
+        UserSerializer: Record<string, never>;
         RegisterDto: {
             /**
              * @description Tên đăng nhập của người dùng (không được trùng)
@@ -59,6 +114,14 @@ export interface components {
              */
             bio?: string;
         };
+        TokenResponse: {
+            access_token: string;
+        };
+        LoginDto: {
+            username: string;
+            password: string;
+        };
+        ForgotPasswordDto: Record<string, never>;
     };
     responses: never;
     parameters: never;
@@ -68,7 +131,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    AuthController_register: {
+    AuthController_register_v1: {
         parameters: {
             query?: never;
             header?: never;
@@ -80,6 +143,73 @@ export interface operations {
                 "application/json": components["schemas"]["RegisterDto"];
             };
         };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseData"] & {
+                        data?: components["schemas"]["UserSerializer"];
+                    };
+                };
+            };
+        };
+    };
+    AuthController_Login_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LoginDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseData"] & {
+                        data?: components["schemas"]["TokenResponse"];
+                    };
+                };
+            };
+        };
+    };
+    PasswordResetController_forgotPassword_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ForgotPasswordDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    PasswordResetController_resetPassword_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             201: {
                 headers: {

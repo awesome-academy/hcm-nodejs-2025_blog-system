@@ -1,0 +1,12 @@
+{
+  "home": "Trang chủ",
+  "blogs": "Bài viết",
+  "myPosts": "Bài viết của tôi",
+  "profile": "Hồ sơ",
+  "logout": "Đăng xuất",
+  "login": "Đăng nhập",
+  "register": "Đăng ký",
+
+  "manageUsers": "Quản lý người dùng",
+  "managePosts": "Quản lý bài viết"
+}

@@ -17,7 +17,5 @@
   "bio": "Bio",
   "register": "Register",
   "already_have_account": "Already have an account?",
-  "login": "Login",
-
-  "register_success": "Registration successful!"
+  "login": "Login"
 }

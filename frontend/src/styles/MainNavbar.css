@@ -1,0 +1,38 @@
+.main-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff; 
+  padding: 0 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.menu-left {
+  flex: 1;
+  background: transparent;
+  border-bottom: none;
+}
+
+.menu-right {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border-bottom: none;
+}
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000; 
+  cursor: pointer;
+}
+
+.username {
+  color: #000; 
+  font-weight: 500;
+}
+
+.main-navbar .ant-menu-horizontal {
+  border-bottom: 1px solid #eaeaea; 
+}

@@ -1,0 +1,24 @@
+{
+  "hero": {
+    "title": "A platform for sharing knowledge and writing experience",
+    "description": "Explore thousands of high-quality articles from top experts in various fields",
+    "searchPlaceholder": "Search for articles, topics, or authors...",
+    "searchBtn": "Search",
+    "stats": {
+      "posts": "Posts",
+      "authors": "Authors",
+      "readers": "Readers"
+    }
+  },
+  "categories": {
+    "title": "Article Categories",
+    "description": "Discover diverse topics from top experts",
+    "postsCount": "posts"
+  },
+  "recentPosts": {
+    "title": "Latest Posts",
+    "description": "Stay updated with the newest posts from our community",
+    "readMore": "Read more",
+    "viewAll": "View all posts"
+  }
+}
