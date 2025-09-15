@@ -32,4 +32,8 @@ export const ValidationMessage = {
   // Bio
   BIO_INVALID: 'validation.bio_invalid',
   BIO_MAX: 'validation.bio_max',
+
+  // Avatar
+  AVATAR_INVALID: 'validation.avatar_invalid',
+  AVATAR_MAX: 'validation.avatar_max',
 };

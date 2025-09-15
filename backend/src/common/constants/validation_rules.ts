@@ -6,4 +6,5 @@ export const ValidationRules = {
   PASSWORD_MIN_LENGTH: 6,
   PENNAME_MAX_LENGTH: 50,
   BIO_MAX_LENGTH: 200,
+  URL_MAX_LENGTH: 255,
 };

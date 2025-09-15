@@ -1,0 +1,6 @@
+{
+  "fetch_profile_failed": "Không thể tải thông tin người dùng",
+  "update_profile_failed": "Không thể cập nhật thông tin người dùng",
+  "change_password_failed": "Không thể đổi mật khẩu",
+  "update_success": "Cập nhật thông tin thành công"
+}

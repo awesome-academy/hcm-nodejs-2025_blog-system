@@ -23,6 +23,9 @@ export class User extends AbstractEntity {
   username: string;
 
   @Column()
+  avatarUrl: string;
+
+  @Column()
   passwordHash: string;
 
   @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })

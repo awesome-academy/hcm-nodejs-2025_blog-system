@@ -7,6 +7,7 @@ import { Author } from '../authors/entities/author.entity';
 import { SharedModule } from '../shared/shared.module';
 import { JwtModule } from '@nestjs/jwt';
 import { JWT_EXPIRATION } from '@/common/constants/jwt.constant';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { JWT_EXPIRATION } from '@/common/constants/jwt.constant';
     TypeOrmModule.forFeature([User, Author]),
     SharedModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
   exports: [AuthService],
 })

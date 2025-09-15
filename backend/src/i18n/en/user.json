@@ -1,3 +1,10 @@
 {
-    "user_not_found_by_email": "User not found with this email"
+  "user_not_found_by_email": "User not found with this email",
+  "user_not_found": "User not found",
+  "update_profile_failed": "Failed to update user profile",
+  "current_password_invalid": "Current password is invalid",
+  "password_confirm_mismatch": "New password and confirm password do not match",
+  "password_changed_success": "Password changed successfully",
+  "change_password_failed": "Failed to change password",
+  "fetch_profile_failed": "Failed to fetch user profile"
 }

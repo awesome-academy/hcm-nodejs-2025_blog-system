@@ -11,6 +11,8 @@ import viAuth from "./vi/auth.json";
 import viNavbar from "./vi/navbar.json";
 import viFooter from "./vi/footer.json";
 import viHome from "./vi/home.json";
+import viProfile from "./vi/profile.json";
+import viUser from "./vi/user.json";
 
 //US
 import enRegister from "./en/register.json";
@@ -21,6 +23,8 @@ import enAuth from "./en/auth.json";
 import enNavbar from "./en/navbar.json";
 import enFooter from "./en/footer.json";
 import enHome from "./en/home.json";
+import enProfile from "./en/profile.json";
+import enUser from "./en/user.json";
 
 i18n
   .use(LanguageDetector)
@@ -36,6 +40,8 @@ i18n
         navbar: viNavbar,
         footer: viFooter,
         home: viHome,
+        profile: viProfile,
+        user: viUser,
       },
       en: {
         register: enRegister,
@@ -46,10 +52,23 @@ i18n
         navbar: enNavbar,
         footer: enFooter,
         home: enHome,
+        profile: enProfile,
+        user: enUser,
       },
     },
     fallbackLng: "vi",
-    ns: ["register", "login", "common", "forgotPass", "auth", "navbar", "footer", "home"],
+    ns: [
+      "register",
+      "login",
+      "common",
+      "forgotPass",
+      "auth",
+      "navbar",
+      "footer",
+      "home",
+      "profile",
+      "user",
+    ],
 
     defaultNS: "common",
     interpolation: {
