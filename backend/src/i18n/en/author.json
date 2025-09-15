@@ -1,0 +1,7 @@
+{
+  "author_not_found": "Author not found",
+  "get_pending_failed": "Failed to fetch pending authors",
+  "update_approval_failed": "Failed to update author approval status",
+  "approval_success": "Author has been approved successfully",
+  "rejection_success": "Author has been rejected successfully"
+}

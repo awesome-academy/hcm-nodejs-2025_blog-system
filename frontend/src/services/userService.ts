@@ -3,7 +3,6 @@ import { handleAxiosError } from "../utils/handleError";
 
 import type {
   UpdateProfileFormData,
-  UpdateProfileResponse,
   ChangePasswordFormData,
 } from "../types/user.type";
 
@@ -16,9 +15,7 @@ export const getUserProfile = async () => {
   }
 };
 
-export const updateUserProfile = async (
-  data: UpdateProfileFormData
-): Promise<UpdateProfileResponse> => {
+export const updateUserProfile = async (data: UpdateProfileFormData) => {
   try {
     const formData = new FormData();
 

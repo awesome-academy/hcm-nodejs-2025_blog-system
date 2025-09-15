@@ -22,7 +22,7 @@ import BlogDetail from "../pages/blog/BlogDetail";
 import AuthorPost from "../pages/author/AuthorPost";
 import Profile from "../pages/shared/Profile";
 // admin pages
-import UserManagement from "../pages/admin/UserManagement";
+import AuthorApprovalManagement from "../pages/admin/AuthorManagement";
 import PostManagement from "../pages/admin/PostManagement";
 
 import ProtectedRoute from "./ProtectedRoute";
@@ -62,7 +62,7 @@ const AppRouter = () => {
               </ProtectedRoute>
             }
           >
-            <Route path="users" element={<UserManagement />} />
+            <Route path="users" element={<AuthorApprovalManagement />} />
             <Route path="posts" element={<PostManagement />} />
           </Route>
 

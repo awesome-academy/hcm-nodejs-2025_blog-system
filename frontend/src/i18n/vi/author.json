@@ -1,0 +1,16 @@
+{
+  "avatar": "Avatar",
+  "penName": "Tên bút danh",
+  "fullName": "Tên đầy đủ",
+  "email": "Email",
+  "status": "Trạng thái",
+  "approved": "Đã duyệt",
+  "rejected": "Từ chối",
+  "pending": "Chờ duyệt",
+  "action": "Hành động",
+  "approve": "Duyệt",
+  "reject": "Từ chối",
+  "authorApprovalManagement": "Quản lý phê duyệt tác giả",
+  "fetch_list_failed": "Lấy danh sách tác giả thất bại",
+  "approval_failed": "Duyệt tác giả thất bại"
+}

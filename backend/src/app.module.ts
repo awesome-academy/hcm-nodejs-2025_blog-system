@@ -23,6 +23,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { MailModule } from './common/jobs/mail/mail.module';
 import { PasswordResetModule } from './modules/password_reset_tokens/password_reset.module';
 import { UserModule } from './modules/users/user.module';
+import { AdminAuthorModule } from './modules/authors/author.module';
 
 @Module({
   imports: [
@@ -48,7 +49,8 @@ import { UserModule } from './modules/users/user.module';
     AuthModule,
     MailModule,
     PasswordResetModule,
-    UserModule
+    UserModule,
+    AdminAuthorModule,
   ],
   controllers: [AppController],
   providers: [
