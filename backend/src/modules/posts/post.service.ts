@@ -1,0 +1,193 @@
+import {
+  Injectable,
+  NotFoundException,
+  InternalServerErrorException,
+  BadRequestException,
+} from '@nestjs/common';
+import { InjectRepository, InjectDataSource } from '@nestjs/typeorm';
+import { Repository, DataSource, EntityManager } from 'typeorm';
+import { Post } from './entities/post.entity';
+import { Author } from '@/modules/authors/entities/author.entity';
+import { Category } from '@/modules/categories/entities/category.entity';
+import { Tag } from '@/modules/tags/entities/tag.entity';
+import { CreatePostDto } from './dto/create-post.dto';
+import { I18nService } from 'nestjs-i18n';
+import { RequestI18nContextService } from '@/common/context/i18nContext.service';
+import { BaseI18nService } from '../shared/baseI18n.service';
+import { PostSerializer } from './serializers/post.serializer';
+import { plainToInstance } from 'class-transformer';
+import { CloudinaryService } from '../shared/cloudinary.service';
+import { formatName } from '@/common/utils/formatName.util';
+import { AdminAuthorService } from '../authors/author.service';
+import { CategoryService } from '../categories/category.service';
+import { TagService } from '../tags/tag.service';
+
+@Injectable()
+export class PostService extends BaseI18nService {
+  constructor(
+    @InjectRepository(Post)
+    private readonly postRepo: Repository<Post>,
+    @InjectDataSource()
+    private readonly dataSource: DataSource,
+    i18n: I18nService,
+    Context: RequestI18nContextService,
+    private readonly adminAuthorService: AdminAuthorService,
+    private readonly categoryService: CategoryService,
+    private readonly tagService: TagService,
+    private readonly cloudinaryService: CloudinaryService,
+  ) {
+    super(i18n, Context);
+  }
+
+  async create(
+    userId: number,
+    dto: CreatePostDto,
+    file?: Express.Multer.File,
+  ): Promise<PostSerializer> {
+    const queryRunner = this.dataSource.createQueryRunner();
+
+    // 1. Kết nối và bắt đầu transaction
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      // 2. Lấy Author
+      const author = await this.adminAuthorService.getAuthorByUserId(
+        userId,
+        queryRunner.manager,
+      );
+      // 3. Handle Category
+      const category = await this.handleCategory(dto, queryRunner.manager);
+
+      // 4. Handle Tags
+      const tags = await this.handleTags(dto, queryRunner.manager);
+
+      //5. Upload File
+      let imageUrl = dto.imageUrl || undefined;
+      if (file) {
+        imageUrl = await this.cloudinaryService.uploadImage(file);
+      }
+
+      // 6. Tạo Post
+      const post = queryRunner.manager.create(Post, {
+        title: dto.title,
+        content: dto.content,
+        author,
+        category,
+        tags,
+        imageUrl,
+      });
+      const savedPost = await queryRunner.manager.save(post);
+
+      // 7. Commit transaction
+      await queryRunner.commitTransaction();
+
+      return plainToInstance(PostSerializer, savedPost, {
+        excludeExtraneousValues: true,
+      });
+    } catch (error) {
+      // Rollback nếu có lỗi
+      await queryRunner.rollbackTransaction();
+
+      if (
+        error instanceof NotFoundException ||
+        error instanceof BadRequestException
+      )
+        throw error;
+      throw new InternalServerErrorException(
+        await this.t('post.create_failed'),
+      );
+    } finally {
+      // Giải phóng connection
+      await queryRunner.release();
+    }
+  }
+
+  private async handleCategory(
+    dto: CreatePostDto,
+    manager: EntityManager,
+  ): Promise<Category | undefined> {
+    const { category } = dto;
+    if (!category) return undefined;
+
+    if (category.id) {
+      return this.categoryService.findById(category.id, manager);
+    }
+
+    const formattedName = formatName(category.name);
+    const existingCategory = await this.categoryService.findByName(
+      formattedName,
+      manager,
+    );
+
+    if (existingCategory) {
+      throw new BadRequestException(
+        await this.t('post.category_already_exists'),
+      );
+    }
+
+    const newCategory = manager.create(Category, {
+      name: formattedName,
+    });
+    return manager.save(newCategory);
+  }
+
+  private async handleTags(
+    dto: CreatePostDto,
+    manager: EntityManager,
+  ): Promise<Tag[]> {
+    const tags: Tag[] = [];
+    if (!dto.tags?.length) return tags;
+
+    for (const tagDto of dto.tags) {
+      if (tagDto.id) {
+        const existingTags = await this.tagService.findByIds(
+          [tagDto.id],
+          manager,
+        );
+        const existingTag = existingTags[0];
+
+        if (!existingTag) {
+          throw new BadRequestException(await this.t('post.tag_not_found'));
+        }
+        tags.push(existingTag);
+      } else {
+        const formattedName = formatName(tagDto.name);
+        const existingTag = await this.tagService.findByName(
+          formattedName,
+          manager,
+        );
+
+        if (existingTag) {
+          throw new BadRequestException(
+            await this.t('post.tag_already_exists'),
+          );
+        }
+        const newTag = manager.create(Tag, { name: formattedName });
+        await manager.save(newTag);
+        tags.push(newTag);
+      }
+    }
+    return tags;
+  }
+
+  async getMyPosts(userId: number): Promise<PostSerializer[]> {
+    try {
+      const author = await this.adminAuthorService.getAuthorByUserId(userId);
+      const posts = await this.postRepo.find({
+        where: { author: { id: author.id } },
+        relations: ['author', 'category', 'tags'],
+        order: { createdAt: 'DESC' },
+      });
+
+      return plainToInstance(PostSerializer, posts, {
+        excludeExtraneousValues: true,
+      });
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      throw new InternalServerErrorException(await this.t('post.fetch_failed'));
+    }
+  }
+}

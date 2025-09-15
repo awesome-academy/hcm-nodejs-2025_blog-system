@@ -9,5 +9,6 @@ import { SharedModule } from '../shared/shared.module';
   imports: [TypeOrmModule.forFeature([Author]), SharedModule],
   providers: [AdminAuthorService],
   controllers: [AdminAuthorController],
+  exports: [AdminAuthorService],
 })
 export class AdminAuthorModule {}

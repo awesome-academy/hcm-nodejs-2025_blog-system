@@ -1,0 +1,23 @@
+.post-modal-content {
+  height: 85vh;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.post-modal-form {
+  min-height: 80vh;
+}
+
+.post-modal-quill {
+  height: 70vh;
+  margin-bottom: 20px;
+}
+
+.post-modal-footer {
+  text-align: right;
+  margin-top: 16px;
+}
+
+.post-modal-footer button {
+  margin-right: 8px;
+}
