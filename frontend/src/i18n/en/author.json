@@ -1,0 +1,16 @@
+{
+  "avatar": "Avatar",
+  "penName": "Pen Name",
+  "fullName": "Full Name",
+  "email": "Email",
+  "status": "Status",
+  "approved": "Approved",
+  "rejected": "Rejected",
+  "pending": "Pending",
+  "action": "Action",
+  "approve": "Approve",
+  "reject": "Reject",
+  "authorApprovalManagement": "Author Approval Management",
+  "fetch_list_failed": "Failed to fetch author list",
+  "approval_failed": "Author approval failed"
+}

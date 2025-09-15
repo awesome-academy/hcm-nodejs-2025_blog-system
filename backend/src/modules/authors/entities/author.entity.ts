@@ -4,6 +4,12 @@ import { User } from '@/modules/users/entities/user.entity';
 import { Post } from '@/modules/posts/entities/post.entity';
 import { Follower } from '@/modules/followers/entities/follower.entity';
 
+export enum AuthorStatus {
+  PENDING = 'pending',
+  APPROVED = 'approved',
+  REJECTED = 'rejected',
+}
+
 @Entity('authors')
 export class Author extends AbstractEntity {
   @Column({ unique: true })
@@ -12,8 +18,12 @@ export class Author extends AbstractEntity {
   @Column({ type: 'text', nullable: true })
   bio: string;
 
-  @Column({ default: false })
-  isApproved: boolean;
+  @Column({
+    type: 'enum',
+    enum: AuthorStatus,
+    default: AuthorStatus.PENDING,
+  })
+  isApproved: AuthorStatus;
 
   //Relations
   @OneToOne(() => User, (user) => user.author)

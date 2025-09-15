@@ -1,0 +1,7 @@
+{
+  "author_not_found": "Không tìm thấy tác giả",
+  "get_pending_failed": "Lấy danh sách tác giả chờ duyệt thất bại",
+  "update_approval_failed": "Cập nhật trạng thái duyệt tác giả thất bại",
+  "approval_success": "Duyệt tác giả thành công",
+  "rejection_success": "Từ chối tác giả thành công"
+}

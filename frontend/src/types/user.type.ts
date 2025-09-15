@@ -1,4 +1,4 @@
-import type { paths, components } from "../types/api";
+import type {components } from "../types/api";
 
 export type UserSerializer = components["schemas"]["UserSerializer"];
 
@@ -26,9 +26,3 @@ export interface ChangePasswordFormData {
   newPassword: string;
   confirmPassword: string;
 }
-
-export type UpdateProfileResponse =
-  paths["/v1/users/profile"]["patch"]["responses"]["200"]["content"]["application/json"];
-
-export type ChangePasswordResponse =
-  paths["/v1/users/profile/password"]["patch"]["responses"]["200"]["content"]["application/json"];
