@@ -1,0 +1,13 @@
+{
+  "create_post_success": "Post created successfully",
+  "fetch_listTags_failed": "Failed to fetch tags",
+  "fetch_listCategories_failed": "Failed to fetch categories",
+  "fetch_listPosts_failed": "Failed to fetch posts",
+  "create_failed": "Failed to create post",
+  "my_posts_title": "My Posts",
+  "create_post_button": "Create New Post",
+  "delete_post_confirm": "Are you sure delete this post?",
+  "yes": "Yes",
+  "no": "No",
+  "no_posts_yet": "You have no posts yet."
+}

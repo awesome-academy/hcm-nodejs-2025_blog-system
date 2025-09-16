@@ -1,0 +1,11 @@
+{
+  "author_not_found": "Tác giả không tồn tại",
+  "category_not_found": "Danh mục không tồn tại",
+  "category_already_exists": "Danh mục đã tồn tại",
+  "tag_not_found": "Tag không tồn tại",
+  "tag_already_exists": "Tag đã tồn tại",
+  "create_failed": "Tạo bài viết thất bại",
+  "fetch_failed": "Lấy danh sách bài viết thất bại",
+  "tag_fetch_failed": "Lấy danh sách tag thất bại",
+  "category_fetch_failed": "Lấy danh sách danh mục thất bại"
+}

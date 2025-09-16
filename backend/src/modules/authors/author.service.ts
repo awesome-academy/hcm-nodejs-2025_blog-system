@@ -4,7 +4,7 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, EntityManager } from 'typeorm';
 import { Author } from '@/modules/authors/entities/author.entity';
 import { ApprovalAuthorDto } from './dto/approval-author.dto';
 import { BaseI18nService } from '../shared/baseI18n.service';
@@ -68,5 +68,23 @@ export class AdminAuthorService extends BaseI18nService {
         await this.t('author.update_approval_failed'),
       );
     }
+  }
+
+  async getAuthorByUserId(
+    userId: number,
+    manager?: EntityManager,
+  ): Promise<Author> {
+    const repo = manager
+      ? manager.getRepository(Author)
+      : this.authorRepository;
+
+    const author = await repo.findOne({
+      where: { user: { id: userId } },
+    });
+
+    if (!author) {
+      throw new NotFoundException(await this.t('author.author_not_found'));
+    }
+    return author;
   }
 }

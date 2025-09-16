@@ -29,6 +29,9 @@ export class Post extends AbstractEntity {
   @Column({ type: 'enum', enum: PostStatus, default: PostStatus.DRAFT })
   status: PostStatus;
 
+  @Column()
+  imageUrl: string;
+
   // Relations
   @ManyToOne(() => Author, (author) => author.posts)
   @JoinColumn({ name: 'author_id' })

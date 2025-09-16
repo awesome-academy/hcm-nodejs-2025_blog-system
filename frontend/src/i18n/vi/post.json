@@ -1,0 +1,13 @@
+{
+  "create_post_success": "Tạo bài viết thành công",
+  "fetch_listTags_failed": "Lấy danh sách tag thất bại",
+  "fetch_listCategories_failed": "Lấy danh sách danh mục thất bại",
+  "fetch_listPosts_failed": "Lấy danh sách bài viết thất bại",
+  "create_failed": "Tạo bài viết thất bại",
+  "my_posts_title": "Bài viết của tôi",
+  "create_post_button": "Tạo bài viết mới",
+  "delete_post_confirm": "Bạn có chắc chắn muốn xóa bài viết này không?",
+  "yes": "Có",
+  "no": "Không",
+  "no_posts_yet": "Bạn chưa có bài viết nào."
+}

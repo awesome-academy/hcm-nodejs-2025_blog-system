@@ -1,0 +1,11 @@
+{
+  "author_not_found": "Author not found",
+  "category_not_found": "Category not found",
+  "category_already_exists": "Category already exists",
+  "tag_not_found": "Tag not found",
+  "tag_already_exists": "Tag already exists",
+  "create_failed": "Failed to create post",
+  "fetch_failed": "Failed to fetch posts",
+  "tag_fetch_failed": "Failed to fetch tags",
+  "category_fetch_failed": "Failed to fetch categories"
+}

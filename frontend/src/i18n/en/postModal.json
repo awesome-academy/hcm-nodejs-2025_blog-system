@@ -1,0 +1,19 @@
+{
+  "modal_title": "Create New Post",
+  "ok_button": "Submit",
+  "cancel_button": "Cancel",
+  "submitting_tip": "Submitting...",
+  "title_label": "Title",
+  "title_placeholder": "Enter post title",
+  "title_required": "Title is required",
+  "category_label": "Category",
+  "category_placeholder": "Select or type a new category",
+  "category_required": "Category is required",
+  "tags_label": "Tags",
+  "tags_placeholder": "Select or type new tags",
+  "tags_required": "At least one tag is required",
+  "content_label": "Content",
+  "cover_image_label": "Cover Image",
+  "cover_image_required": "Cover image is required",
+  "upload_button": "Upload"
+}

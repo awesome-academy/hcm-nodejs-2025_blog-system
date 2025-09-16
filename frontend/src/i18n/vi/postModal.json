@@ -1,0 +1,19 @@
+{
+  "modal_title": "Tạo bài viết mới",
+  "ok_button": "Xác nhận",
+  "cancel_button": "Hủy",
+  "submitting_tip": "Đang gửi...",
+  "title_label": "Tiêu đề",
+  "title_placeholder": "Nhập tiêu đề bài viết",
+  "title_required": "Tiêu đề là bắt buộc",
+  "category_label": "Danh mục",
+  "category_placeholder": "Chọn hoặc nhập danh mục mới",
+  "category_required": "Danh mục là bắt buộc",
+  "tags_label": "Thẻ",
+  "tags_placeholder": "Chọn hoặc nhập thẻ mới",
+  "tags_required": "Ít nhất một thẻ là bắt buộc",
+  "content_label": "Nội dung",
+  "cover_image_label": "Ảnh bìa",
+  "cover_image_required": "Ảnh bìa là bắt buộc",
+  "upload_button": "Tải lên"
+}
