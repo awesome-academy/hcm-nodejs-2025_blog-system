@@ -4,6 +4,8 @@ import {
   getListTags,
   getListCategories,
   createPost,
+  softDeletePost,
+  updatePost as updatePostAPI,
 } from "../services/authorPostService";
 import type {
   PostSerializer,
@@ -11,6 +13,8 @@ import type {
   CategorySerializer,
   CreatePostFormValues,
   CreatePostFormData,
+  UpdatePostFormData,
+  UpdatePostFormValues,
 } from "../types/authorPost.type";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
@@ -62,10 +66,43 @@ export const usePosts = () => {
         file,
       };
 
-      console.log(payload);
-
       await createPost(payload);
       toast.success(t("create_post_success"));
+      await loadPosts();
+      return true;
+    } catch (err) {
+      toast.error((err as Error).message);
+      return false;
+    }
+  };
+
+  const updatePost = async (id: number, values: UpdatePostFormValues) => {
+    try {
+      const file = values.image?.[0]?.originFileObj;
+
+      const payload: UpdatePostFormData = {
+        title: values.title,
+        content: values.content,
+        category: values.category,
+        tags: values.tags,
+        file,
+      };
+
+      await updatePostAPI(id, payload);
+      toast.success(t("update_post_success"));
+      await loadPosts();
+      return true;
+    } catch (err) {
+      toast.error((err as Error).message);
+      return false;
+    }
+  };
+
+  //Soft Delete
+  const deletePost = async (postId: number) => {
+    try {
+      const res = await softDeletePost(postId);
+      toast.success(res.data.message);
       await loadPosts();
       return true;
     } catch (err) {
@@ -82,5 +119,7 @@ export const usePosts = () => {
     loadTagsAndCategories,
     loading,
     createNewPost,
+    deletePost,
+    updatePost,
   };
 };

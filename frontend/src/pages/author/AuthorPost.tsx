@@ -20,6 +20,7 @@ import {
 import { usePosts } from "../../hooks/useAuthorPost";
 import PostModal from "../../components/post/PostModal";
 import { useTranslation } from "react-i18next";
+import type { PostSerializer } from "../../types/authorPost.type";
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -33,18 +34,31 @@ const AuthorPost = () => {
     categories,
     loadTagsAndCategories,
     createNewPost,
+    updatePost,
+    deletePost,
   } = usePosts();
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [editingPost, setEditingPost] = useState<PostSerializer | null>(null);
 
   useEffect(() => {
     loadPosts();
     loadTagsAndCategories();
   }, [loadPosts, loadTagsAndCategories]);
 
-  const handleEdit = () => {};
+  const handleEdit = (post: PostSerializer) => {
+    setEditingPost(post);
+    setModalVisible(true);
+  };
 
-  const handleDelete = () => {};
+  const handleDelete = async (postId: number) => {
+    await deletePost(postId);
+  };
+
+  const handleCreateClick = () => {
+    setEditingPost(null);
+    setModalVisible(true);
+  };
 
   return (
     <div>
@@ -62,7 +76,7 @@ const AuthorPost = () => {
         <Button
           type="primary"
           icon={<PlusOutlined />}
-          onClick={() => setModalVisible(true)}
+          onClick={handleCreateClick}
         >
           {t("create_post_button")}
         </Button>
@@ -92,10 +106,10 @@ const AuthorPost = () => {
                 ) : null
               }
               actions={[
-                <EditOutlined key="edit" onClick={() => handleEdit()} />,
+                <EditOutlined key="edit" onClick={() => handleEdit(post)} />,
                 <Popconfirm
                   title={t("delete_post_confirm")}
-                  onConfirm={() => handleDelete()}
+                  onConfirm={() => handleDelete(post.id)}
                   okText={t("yes")}
                   cancelText={t("no")}
                 >
@@ -137,6 +151,8 @@ const AuthorPost = () => {
         categories={categories}
         tags={tags}
         createNewPost={createNewPost}
+        updatePost={updatePost}
+        editingPost={editingPost}
       />
     </div>
   );

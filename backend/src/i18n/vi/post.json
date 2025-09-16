@@ -7,5 +7,9 @@
   "create_failed": "Tạo bài viết thất bại",
   "fetch_failed": "Lấy danh sách bài viết thất bại",
   "tag_fetch_failed": "Lấy danh sách tag thất bại",
-  "category_fetch_failed": "Lấy danh sách danh mục thất bại"
+  "category_fetch_failed": "Lấy danh sách danh mục thất bại",
+  "not_found": "Bài viết không tồn tại",
+  "deleted_success": "Xóa bài viết thành công",
+  "delete_failed": "Xóa bài viết thất bại",
+  "update_failed": "Cập nhật bài viết thất bại"
 }

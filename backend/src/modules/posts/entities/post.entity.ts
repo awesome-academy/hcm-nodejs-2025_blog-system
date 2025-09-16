@@ -13,7 +13,6 @@ import { Category } from '@/modules/categories/entities/category.entity';
 import { Comment } from '@/modules/comments/entities/comment.entity';
 import { Tag } from '@/modules/tags/entities/tag.entity';
 export enum PostStatus {
-  DRAFT = 'draft',
   PENDING = 'pending',
   PUBLISHED = 'published',
 }
@@ -26,11 +25,14 @@ export class Post extends AbstractEntity {
   @Column('text')
   content: string;
 
-  @Column({ type: 'enum', enum: PostStatus, default: PostStatus.DRAFT })
+  @Column({ type: 'enum', enum: PostStatus, default: PostStatus.PENDING })
   status: PostStatus;
 
   @Column()
   imageUrl: string;
+
+  @Column({ type: 'timestamp', nullable: true })
+  deletedAt?: Date;
 
   // Relations
   @ManyToOne(() => Author, (author) => author.posts)

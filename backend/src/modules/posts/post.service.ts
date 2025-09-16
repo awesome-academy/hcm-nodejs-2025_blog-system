@@ -5,9 +5,8 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { InjectRepository, InjectDataSource } from '@nestjs/typeorm';
-import { Repository, DataSource, EntityManager } from 'typeorm';
+import { Repository, DataSource, EntityManager, IsNull } from 'typeorm';
 import { Post } from './entities/post.entity';
-import { Author } from '@/modules/authors/entities/author.entity';
 import { Category } from '@/modules/categories/entities/category.entity';
 import { Tag } from '@/modules/tags/entities/tag.entity';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -21,6 +20,7 @@ import { formatName } from '@/common/utils/formatName.util';
 import { AdminAuthorService } from '../authors/author.service';
 import { CategoryService } from '../categories/category.service';
 import { TagService } from '../tags/tag.service';
+import { UpdatePostDto } from './dto/update-post.dto';
 
 @Injectable()
 export class PostService extends BaseI18nService {
@@ -175,7 +175,10 @@ export class PostService extends BaseI18nService {
     try {
       const author = await this.adminAuthorService.getAuthorByUserId(userId);
       const posts = await this.postRepo.find({
-        where: { author: { id: author.id } },
+        where: {
+          author: { id: author.id },
+          deletedAt: IsNull(),
+        },
         relations: ['author', 'category', 'tags'],
         order: { createdAt: 'DESC' },
       });
@@ -188,6 +191,94 @@ export class PostService extends BaseI18nService {
         throw error;
       }
       throw new InternalServerErrorException(await this.t('post.fetch_failed'));
+    }
+  }
+
+  async softDeletePost(postId: number): Promise<{ message: string }> {
+    try {
+      const post = await this.postRepo.findOne({
+        where: { id: postId, deletedAt: IsNull() },
+      });
+      if (!post) {
+        throw new NotFoundException(await this.t('post.not_found'));
+      }
+
+      post.deletedAt = new Date();
+      await this.postRepo.save(post);
+
+      return { message: await this.t('post.deleted_success') };
+    } catch (error) {
+      if (error instanceof NotFoundException) throw error;
+      throw new InternalServerErrorException(
+        await this.t('post.delete_failed'),
+      );
+    }
+  }
+
+  async updatePost(
+    postId: number,
+    dto: UpdatePostDto,
+    file?: Express.Multer.File,
+  ): Promise<PostSerializer> {
+    const queryRunner = this.dataSource.createQueryRunner();
+
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      const post = await queryRunner.manager.findOne(Post, {
+        where: { id: postId, deletedAt: IsNull() },
+        relations: ['category', 'tags', 'author'],
+      });
+
+      if (!post) {
+        throw new NotFoundException(await this.t('post.not_found'));
+      }
+
+      // 1. Gán trực tiếp, không cần check if
+      post.title = dto.title ?? post.title;
+      post.content = dto.content ?? post.content;
+
+      // 2. Gán image
+      post.imageUrl = file
+        ? await this.cloudinaryService.uploadImage(file)
+        : (dto.imageUrl ?? post.imageUrl);
+
+      // 3. Category
+      const category = await this.handleCategory(
+        dto as any,
+        queryRunner.manager,
+      );
+      if (category) {
+        post.category = category;
+      }
+
+      // 4. Tags
+      const tags = await this.handleTags(dto as any, queryRunner.manager);
+      post.tags = tags;
+
+      // 5. Lưu post
+      const updatedPost = await queryRunner.manager.save(post);
+
+      await queryRunner.commitTransaction();
+
+      return plainToInstance(PostSerializer, updatedPost, {
+        excludeExtraneousValues: true,
+      });
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+
+      if (
+        error instanceof NotFoundException ||
+        error instanceof BadRequestException
+      )
+        throw error;
+
+      throw new InternalServerErrorException(
+        await this.t('post.update_failed'),
+      );
+    } finally {
+      await queryRunner.release();
     }
   }
 }
