@@ -23,10 +23,11 @@ import { AuthModule } from './modules/auth/auth.module';
 import { MailModule } from './common/jobs/mail/mail.module';
 import { PasswordResetModule } from './modules/password_reset_tokens/password_reset.module';
 import { UserModule } from './modules/users/user.module';
-import { AdminAuthorModule } from './modules/authors/author.module';
+import { AuthorModule } from './modules/authors/author.module';
 import { PostModule } from './modules/posts/post.module';
 import { TagModule } from './modules/tags/tag.module';
 import { CategoryModule } from './modules/categories/category.module';
+import { AdminModule } from './modules/admin/admin.module';
 
 @Module({
   imports: [
@@ -53,10 +54,11 @@ import { CategoryModule } from './modules/categories/category.module';
     MailModule,
     PasswordResetModule,
     UserModule,
-    AdminAuthorModule,
+    AuthorModule,
     PostModule,
     TagModule,
     CategoryModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [

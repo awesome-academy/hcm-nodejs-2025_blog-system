@@ -79,15 +79,21 @@ const PostModal = ({
       const values = await form.validateFields();
       setLoading(true);
 
-      const selectedCategory = categories.find((c) => c.name === values.category);
+      const selectedCategory = categories.find(
+        (c) => c.name === values.category
+      );
       const category: CreateCategoryDto = selectedCategory
         ? { id: selectedCategory.id, name: selectedCategory.name }
         : { name: values.category };
 
-      const tagDtos: CreateTagDto[] = (values.tags || []).map((tagName: string) => {
-        const existing = tags.find((t) => t.name === tagName);
-        return existing ? { id: existing.id, name: existing.name } : { name: tagName };
-      });
+      const tagDtos: CreateTagDto[] = (values.tags || []).map(
+        (tagName: string) => {
+          const existing = tags.find((t) => t.name === tagName);
+          return existing
+            ? { id: existing.id, name: existing.name }
+            : { name: tagName };
+        }
+      );
 
       const payload: CreatePostFormValues = {
         title: values.title,
@@ -95,6 +101,7 @@ const PostModal = ({
         category,
         tags: tagDtos,
         image: imageFile ? [{ originFileObj: imageFile }] : undefined,
+        imageUrl: previewImage || undefined,
       };
 
       let success = false;
@@ -176,7 +183,11 @@ const PostModal = ({
             label={t("tags_label")}
             rules={[{ required: true, message: t("tags_required") }]}
           >
-            <Select mode="tags" placeholder={t("tags_placeholder")} tokenSeparators={[","]}>
+            <Select
+              mode="tags"
+              placeholder={t("tags_placeholder")}
+              tokenSeparators={[","]}
+            >
               {tags.map((tag) => (
                 <Option key={tag.id} value={tag.name}>
                   {tag.name}
@@ -194,11 +205,7 @@ const PostModal = ({
             />
           </Form.Item>
 
-          <Form.Item
-            label={t("cover_image_label")}
-            name="image"
-            rules={[{ required: true, message: t("cover_image_required") }]}
-          >
+          <Form.Item label={t("cover_image_label")} name="image">
             <Upload
               listType="picture-card"
               beforeUpload={(file) => {

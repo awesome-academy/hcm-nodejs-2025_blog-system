@@ -29,6 +29,7 @@ export interface CreatePostFormValues {
   category: CreateCategoryDto;
   tags: CreateTagDto[];
   image?: { originFileObj: File }[];
+  imageUrl?: string;
 }
 
 // ========================
@@ -59,5 +60,6 @@ export interface UpdatePostFormValues {
   content?: string;
   category?: UpdateCategoryDto;
   tags?: UpdateTagDto[];
+  imageUrl?: string;
   image?: { originFileObj: File }[];
 }
