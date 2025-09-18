@@ -164,6 +164,38 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/posts/softDelete/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: operations["PostController_softDelete_v1"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/posts/update/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["PostController_update_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/categories/list": {
         parameters: {
             query?: never;
@@ -342,6 +374,13 @@ export interface components {
             imageUrl?: string;
             category: components["schemas"]["CreateCategoryDto"];
             tags: components["schemas"]["CreateTagDto"][];
+        };
+        UpdatePostDto: {
+            title?: string;
+            content?: string;
+            imageUrl?: string;
+            category?: components["schemas"]["CreateCategoryDto"];
+            tags?: components["schemas"]["CreateTagDto"][];
         };
     };
     responses: never;
@@ -600,6 +639,56 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["ResponseData"] & {
                         data?: components["schemas"]["PostSerializer"][];
+                    };
+                };
+            };
+        };
+    };
+    PostController_softDelete_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseData"] & {
+                        data?: components["schemas"]["MessageResponseDto"];
+                    };
+                };
+            };
+        };
+    };
+    PostController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdatePostDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseData"] & {
+                        data?: components["schemas"]["PostSerializer"];
                     };
                 };
             };

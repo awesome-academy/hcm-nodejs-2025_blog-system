@@ -7,6 +7,9 @@ import {
   Get,
   UseInterceptors,
   UploadedFile,
+  Delete,
+  Param,
+  Put
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -15,6 +18,8 @@ import { PostSerializer } from './serializers/post.serializer';
 import { ApiResponseData } from '@/common/interceptors/responseSwagger.interceptor';
 import { ApiTags, ApiBody } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { MessageResponseDto } from '@/common/response/response_message';
+import { UpdatePostDto } from './dto/update-post.dto';
 
 @ApiTags('Posts')
 @UseGuards(JwtAuthGuard)
@@ -37,5 +42,23 @@ export class PostController {
   @ApiResponseData(PostSerializer, true)
   async getPostsByAuthor(@Req() req): Promise<PostSerializer[]> {
     return this.postService.getMyPosts(req.user.id);
+  }
+
+  @Delete('softDelete/:id')
+  @ApiResponseData(MessageResponseDto)
+  async softDelete(@Param('id') id: number) {
+    return this.postService.softDeletePost(id);
+  }
+
+  @Put('update/:id')
+  @ApiBody({ type: UpdatePostDto })
+  @ApiResponseData(PostSerializer)
+  @UseInterceptors(FileInterceptor('file'))
+  async update(
+    @Param('id') id: number,
+    @Body() dto: UpdatePostDto,
+    @UploadedFile() file?: Express.Multer.File,
+  ): Promise<PostSerializer> {
+    return this.postService.updatePost(id, dto, file);
   }
 }

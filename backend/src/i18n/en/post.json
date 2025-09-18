@@ -7,5 +7,9 @@
   "create_failed": "Failed to create post",
   "fetch_failed": "Failed to fetch posts",
   "tag_fetch_failed": "Failed to fetch tags",
-  "category_fetch_failed": "Failed to fetch categories"
+  "category_fetch_failed": "Failed to fetch categories",
+  "not_found": "Post not found",
+  "deleted_success": "Post deleted successfully",
+  "delete_failed": "Failed to delete post",
+  "update_failed": "Failed to update post"
 }

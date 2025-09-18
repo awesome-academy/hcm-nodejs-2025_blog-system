@@ -14,7 +14,6 @@ export interface CreateTagDto {
   name: string;
 }
 
-// Payload gửi lên API
 export interface CreatePostFormData {
   title: string;
   content: string;
@@ -24,11 +23,41 @@ export interface CreatePostFormData {
   file?: File;
 }
 
-// Dữ liệu form (frontend)
 export interface CreatePostFormValues {
   title: string;
   content: string;
   category: CreateCategoryDto;
   tags: CreateTagDto[];
+  image?: { originFileObj: File }[];
+}
+
+// ========================
+// Update Post
+// ========================
+
+export interface UpdateCategoryDto {
+  id?: number;
+  name?: string;
+}
+
+export interface UpdateTagDto {
+  id?: number;
+  name?: string;
+}
+
+export interface UpdatePostFormData {
+  title?: string;
+  content?: string;
+  imageUrl?: string;
+  category?: UpdateCategoryDto;
+  tags?: UpdateTagDto[];
+  file?: File;
+}
+
+export interface UpdatePostFormValues {
+  title?: string;
+  content?: string;
+  category?: UpdateCategoryDto;
+  tags?: UpdateTagDto[];
   image?: { originFileObj: File }[];
 }

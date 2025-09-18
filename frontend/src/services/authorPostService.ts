@@ -1,6 +1,9 @@
 import api from "../api/apiClient";
 import { handleAxiosError } from "../utils/handleError";
-import type { CreatePostFormData } from "../types/authorPost.type";
+import type {
+  CreatePostFormData,
+  UpdatePostFormData,
+} from "../types/authorPost.type";
 
 // List tags/categories/posts
 export const getListTags = async () => {
@@ -53,5 +56,45 @@ export const createPost = async (data: CreatePostFormData) => {
     return res.data.data;
   } catch (err) {
     throw handleAxiosError(err, "post.create_failed");
+  }
+};
+
+export const updatePost = async (postId: number, data: UpdatePostFormData) => {
+  try {
+    const formData = new FormData();
+
+    // Gửi luôn title & content
+    formData.append("title", data.title ?? "");
+    formData.append("content", data.content ?? "");
+
+    // Category
+    formData.append("category[id]", data.category?.id?.toString() ?? "");
+    formData.append("category[name]", data.category?.name ?? "");
+
+    // Tags
+    (data.tags || []).forEach((tag, index) => {
+      formData.append(`tags[${index}][id]`, tag.id?.toString() ?? "");
+      formData.append(`tags[${index}][name]`, tag.name ?? "");
+    });
+
+    // Image/File
+    formData.append("imageUrl", data.imageUrl ?? "");
+    if (data.file) {
+      formData.append("file", data.file);
+    }
+
+    const res = await api.put(`/v1/posts/update/${postId}`, formData);
+    return res.data.data;
+  } catch (err) {
+    throw handleAxiosError(err, "post.update_failed");
+  }
+};
+
+export const softDeletePost = async (postId: number) => {
+  try {
+    const res = await api.delete(`/v1/posts/softDelete/${postId}`);
+    return res.data;
+  } catch (err) {
+    throw handleAxiosError(err, "post.delete_failed");
   }
 };
