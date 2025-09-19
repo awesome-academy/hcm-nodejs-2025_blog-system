@@ -35,9 +35,13 @@ export class AdminService extends BaseI18nService {
 
   async getPendingAuthors(): Promise<AuthorSerializer[]> {
     try {
-      return await this.authorRepository.find({
+      const authors = await this.authorRepository.find({
         where: { isApproved: AuthorStatus.PENDING },
         relations: ['user'],
+      });
+
+      return plainToInstance(AuthorSerializer, authors, {
+        excludeExtraneousValues: true,
       });
     } catch (error) {
       throw new BadRequestException(await this.t('author.get_pending_failed'));
@@ -152,35 +156,27 @@ export class AdminService extends BaseI18nService {
         .where('post.deletedAt IS NULL')
         .orderBy('post.createdAt', 'DESC');
 
-      if (filter.title) {
-        query.andWhere('post.title LIKE :title', {
-          title: `%${filter.title}%`,
-        });
-      }
-
       query.andWhere('post.status = :status', {
         status: filter.status ?? 'pending',
       });
 
-      if (filter.authorName) {
-        query.andWhere('author.penName LIKE :authorName', {
-          authorName: `%${filter.authorName}%`,
-        });
-      }
+      // Map các filter field sang column và value
+      const filterMap: Record<string, { column: string; value?: string }> = {
+        title: { column: 'post.title', value: filter.title },
+        authorName: { column: 'author.penName', value: filter.authorName },
+        categoryName: { column: 'category.name', value: filter.categoryName },
+        tagName: { column: 'tags.name', value: filter.tagName },
+      };
 
-      if (filter.categoryName) {
-        query.andWhere('category.name LIKE :categoryName', {
-          categoryName: `%${filter.categoryName}%`,
-        });
-      }
-
-      if (filter.tagName) {
-        query.andWhere('tags.name LIKE :tagName', {
-          tagName: `%${filter.tagName}%`,
-        });
-      }
+      // Loop qua filterMap và thêm dynamic AND WHERE
+      Object.entries(filterMap).forEach(([key, { column, value }]) => {
+        if (value) {
+          query.andWhere(`${column} LIKE :${key}`, { [key]: `%${value}%` });
+        }
+      });
 
       const posts = await query.getMany();
+
       return plainToInstance(PostSerializer, posts, {
         excludeExtraneousValues: true,
       });

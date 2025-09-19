@@ -1,4 +1,4 @@
-import { Expose, Type } from 'class-transformer';
+import { Expose, Transform } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 export class AuthorSerializer {
   @ApiProperty()
@@ -12,4 +12,9 @@ export class AuthorSerializer {
   @ApiProperty()
   @Expose()
   bio: string;
+
+  @ApiProperty()
+  @Expose()
+  @Transform(({ obj }) => obj.user?.avatarUrl)
+  avatarUrl: string;
 }

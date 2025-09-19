@@ -1,0 +1,11 @@
+{
+  "title": "Blog List",
+  "minute": "minutes",
+  "readMore": "Read more",
+  "backToList": "Back to Blog",
+  "author": "Author",
+  "category": "Category",
+  "tags": "Tags",
+  "noData": "No author data available",
+  "authorInfo": "Author Information"
+}
