@@ -1,14 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AdminAuthorService } from './author.service';
-import { AdminAuthorController } from './author.controller';
+import { AuthorService } from './author.service';
 import { Author } from '@/modules/authors/entities/author.entity';
 import { SharedModule } from '../shared/shared.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Author]), SharedModule],
-  providers: [AdminAuthorService],
-  controllers: [AdminAuthorController],
-  exports: [AdminAuthorService],
+  providers: [AuthorService],
+  exports: [AuthorService],
 })
-export class AdminAuthorModule {}
+export class AuthorModule {}

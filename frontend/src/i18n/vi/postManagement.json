@@ -1,0 +1,22 @@
+{
+  "postManagement": "Quản lý bài viết",
+  "thumbnail": "Ảnh bìa",
+  "title": "Tiêu đề",
+  "author": "Tác giả",
+  "category": "Danh mục",
+  "tags": "Thẻ",
+  "status": "Trạng thái",
+  "approved": "Đã duyệt",
+  "rejected": "Bị từ chối",
+  "pending": "Chờ duyệt",
+  "action": "Hành động",
+  "viewDetail": "Xem chi tiết",
+  "publish": "Duyệt",
+  "reject": "Từ chối",
+  "postDetail": "Chi tiết bài viết",
+  "tableOfContents": "Mục lục",
+  "resetFilters": "Đặt Lại",
+  "rejectPost": "Từ chối bài viết",
+  "reject_reason_required": "Vui lòng nhập lý do từ chối",
+  "enter_reject_reason": "Nhập lý do từ chối"
+}

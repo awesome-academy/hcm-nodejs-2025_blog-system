@@ -9,5 +9,6 @@
   "delete_post_confirm": "Are you sure delete this post?",
   "yes": "Yes",
   "no": "No",
-  "no_posts_yet": "You have no posts yet."
+  "no_posts_yet": "You have no posts yet.",
+  "update_post_success": "Post updated successfully"
 }

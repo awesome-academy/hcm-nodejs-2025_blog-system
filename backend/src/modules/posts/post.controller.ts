@@ -9,7 +9,7 @@ import {
   UploadedFile,
   Delete,
   Param,
-  Put
+  Put,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -22,11 +22,11 @@ import { MessageResponseDto } from '@/common/response/response_message';
 import { UpdatePostDto } from './dto/update-post.dto';
 
 @ApiTags('Posts')
-@UseGuards(JwtAuthGuard)
 @Controller('posts')
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post('create')
   @ApiBody({ type: CreatePostDto })
   @ApiResponseData(PostSerializer)
@@ -38,18 +38,22 @@ export class PostController {
   ): Promise<PostSerializer> {
     return this.postService.create(req.user.id, dto, file);
   }
+
+  @UseGuards(JwtAuthGuard)
   @Get('authorPost')
   @ApiResponseData(PostSerializer, true)
   async getPostsByAuthor(@Req() req): Promise<PostSerializer[]> {
     return this.postService.getMyPosts(req.user.id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('softDelete/:id')
   @ApiResponseData(MessageResponseDto)
   async softDelete(@Param('id') id: number) {
     return this.postService.softDeletePost(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('update/:id')
   @ApiBody({ type: UpdatePostDto })
   @ApiResponseData(PostSerializer)

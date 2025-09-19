@@ -7,7 +7,7 @@ import { Tag } from '../tags/entities/tag.entity';
 import { Category } from '../categories/entities/category.entity';
 import { Author } from '../authors/entities/author.entity';
 import { SharedModule } from '../shared/shared.module';
-import { AdminAuthorModule } from '../authors/author.module';
+import { AuthorModule } from '../authors/author.module';
 import { CategoryModule } from '../categories/category.module';
 import { TagModule } from '../tags/tag.module';
 
@@ -15,7 +15,7 @@ import { TagModule } from '../tags/tag.module';
   imports: [
     TypeOrmModule.forFeature([Post, Tag, Category, Author]),
     SharedModule,
-    AdminAuthorModule,
+    AuthorModule,
     CategoryModule,
     TagModule
   ],

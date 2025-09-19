@@ -1,0 +1,22 @@
+{
+  "postManagement": "Post Management",
+  "thumbnail": "Thumbnail",
+  "title": "Title",
+  "author": "Author",
+  "category": "Category",
+  "tags": "Tags",
+  "status": "Status",
+  "approved": "Approved",
+  "rejected": "Rejected",
+  "pending": "Pending",
+  "action": "Action",
+  "viewDetail": "View Detail",
+  "publish": "Publish",
+  "reject": "Reject",
+  "postDetail": "Post Detail",
+  "tableOfContents": "Table of Contents",
+  "resetFilters": "Reset",
+  "rejectPost": "Từ chối bài viết",
+  "reject_reason_required": "Vui lòng nhập lý do từ chối",
+  "enter_reject_reason": "Nhập lý do từ chối"
+}

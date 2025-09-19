@@ -17,7 +17,7 @@ import { PostSerializer } from './serializers/post.serializer';
 import { plainToInstance } from 'class-transformer';
 import { CloudinaryService } from '../shared/cloudinary.service';
 import { formatName } from '@/common/utils/formatName.util';
-import { AdminAuthorService } from '../authors/author.service';
+import { AuthorService } from '../authors/author.service';
 import { CategoryService } from '../categories/category.service';
 import { TagService } from '../tags/tag.service';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -31,7 +31,7 @@ export class PostService extends BaseI18nService {
     private readonly dataSource: DataSource,
     i18n: I18nService,
     Context: RequestI18nContextService,
-    private readonly adminAuthorService: AdminAuthorService,
+    private readonly AuthorService: AuthorService,
     private readonly categoryService: CategoryService,
     private readonly tagService: TagService,
     private readonly cloudinaryService: CloudinaryService,
@@ -52,7 +52,7 @@ export class PostService extends BaseI18nService {
 
     try {
       // 2. Lấy Author
-      const author = await this.adminAuthorService.getAuthorByUserId(
+      const author = await this.AuthorService.getAuthorByUserId(
         userId,
         queryRunner.manager,
       );
@@ -173,7 +173,7 @@ export class PostService extends BaseI18nService {
 
   async getMyPosts(userId: number): Promise<PostSerializer[]> {
     try {
-      const author = await this.adminAuthorService.getAuthorByUserId(userId);
+      const author = await this.AuthorService.getAuthorByUserId(userId);
       const posts = await this.postRepo.find({
         where: {
           author: { id: author.id },

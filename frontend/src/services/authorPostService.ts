@@ -4,11 +4,12 @@ import type {
   CreatePostFormData,
   UpdatePostFormData,
 } from "../types/authorPost.type";
+import { ENDPOINTS } from "../constants/apiEndpoints";
 
 // List tags/categories/posts
 export const getListTags = async () => {
   try {
-    const res = await api.get("/v1/tags/list");
+    const res = await api.get(ENDPOINTS.TAGS.LIST);
     return res.data.data;
   } catch (err) {
     throw handleAxiosError(err, "post.fetch_listTags_failed");
@@ -17,7 +18,7 @@ export const getListTags = async () => {
 
 export const getListCategories = async () => {
   try {
-    const res = await api.get("/v1/categories/list");
+    const res = await api.get(ENDPOINTS.CATEGORIES.LIST);
     return res.data.data;
   } catch (err) {
     throw handleAxiosError(err, "post.fetch_listCategories_failed");
@@ -26,7 +27,7 @@ export const getListCategories = async () => {
 
 export const getListPostsByAuthor = async () => {
   try {
-    const res = await api.get("/v1/posts/authorPost");
+    const res = await api.get(ENDPOINTS.POSTS.AUTHOR_LIST);
     return res.data.data;
   } catch (err) {
     throw handleAxiosError(err, "post.fetch_listPosts_failed");
@@ -52,7 +53,7 @@ export const createPost = async (data: CreatePostFormData) => {
     if (data.file) formData.append("file", data.file);
     if (data.imageUrl) formData.append("imageUrl", data.imageUrl);
 
-    const res = await api.post("/v1/posts/create", formData);
+    const res = await api.post(ENDPOINTS.POSTS.CREATE, formData);
     return res.data.data;
   } catch (err) {
     throw handleAxiosError(err, "post.create_failed");
@@ -83,7 +84,7 @@ export const updatePost = async (postId: number, data: UpdatePostFormData) => {
       formData.append("file", data.file);
     }
 
-    const res = await api.put(`/v1/posts/update/${postId}`, formData);
+    const res = await api.put(ENDPOINTS.POSTS.UPDATE(postId), formData);
     return res.data.data;
   } catch (err) {
     throw handleAxiosError(err, "post.update_failed");
@@ -92,7 +93,7 @@ export const updatePost = async (postId: number, data: UpdatePostFormData) => {
 
 export const softDeletePost = async (postId: number) => {
   try {
-    const res = await api.delete(`/v1/posts/softDelete/${postId}`);
+    const res = await api.delete(ENDPOINTS.POSTS.SOFT_DELETE(postId));
     return res.data;
   } catch (err) {
     throw handleAxiosError(err, "post.delete_failed");

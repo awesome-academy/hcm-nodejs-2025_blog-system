@@ -16,6 +16,7 @@ import viUser from "./vi/user.json";
 import viAuthor from "./vi/author.json";
 import viPostModal from "./vi/postModal.json";
 import viPost from "./vi/post.json";
+import vipostManagement from "./vi/postManagement.json";
 
 //US
 import enRegister from "./en/register.json";
@@ -31,6 +32,7 @@ import enUser from "./en/user.json";
 import enAuthor from "./en/author.json";
 import enPostModal from "./en/postModal.json";
 import enPost from "./en/post.json";
+import enpostManagement from "./en/postManagement.json";
 
 i18n
   .use(LanguageDetector)
@@ -51,6 +53,7 @@ i18n
         author: viAuthor,
         postModal: viPostModal,
         post: viPost,
+        postManagement: vipostManagement,
       },
       en: {
         register: enRegister,
@@ -66,6 +69,7 @@ i18n
         author: enAuthor,
         postModal: enPostModal,
         post: enPost,
+        postManagement: enpostManagement,
       },
     },
     fallbackLng: "vi",
@@ -83,6 +87,7 @@ i18n
       "author",
       "postModal",
       "post",
+      "postManagement",
     ],
 
     defaultNS: "common",

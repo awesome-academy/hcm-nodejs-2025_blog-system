@@ -86,6 +86,7 @@ export const usePosts = () => {
         category: values.category,
         tags: values.tags,
         file,
+        imageUrl: values.imageUrl,
       };
 
       await updatePostAPI(id, payload);

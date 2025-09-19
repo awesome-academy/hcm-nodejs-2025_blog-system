@@ -9,5 +9,6 @@
   "delete_post_confirm": "Bạn có chắc chắn muốn xóa bài viết này không?",
   "yes": "Có",
   "no": "Không",
-  "no_posts_yet": "Bạn chưa có bài viết nào."
+  "no_posts_yet": "Bạn chưa có bài viết nào.",
+  "update_post_success": "Cập nhật bài viết thành công"
 }

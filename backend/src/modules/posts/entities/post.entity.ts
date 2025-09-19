@@ -14,7 +14,8 @@ import { Comment } from '@/modules/comments/entities/comment.entity';
 import { Tag } from '@/modules/tags/entities/tag.entity';
 export enum PostStatus {
   PENDING = 'pending',
-  PUBLISHED = 'published',
+  APPROVED = 'approved',
+  REJECTED = 'rejected',
 }
 
 @Entity('posts')
@@ -27,6 +28,9 @@ export class Post extends AbstractEntity {
 
   @Column({ type: 'enum', enum: PostStatus, default: PostStatus.PENDING })
   status: PostStatus;
+
+  @Column({ type: 'text', nullable: true })
+  rejectionReason?: string | null;
 
   @Column()
   imageUrl: string;

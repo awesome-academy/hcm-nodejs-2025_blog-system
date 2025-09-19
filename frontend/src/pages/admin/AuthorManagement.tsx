@@ -1,13 +1,19 @@
+import { useEffect } from "react";
 import { Table, Space, Button, Avatar, Tag, Typography, Card } from "antd";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import { useAuthors } from "../../hooks/useAuthor";
+import { useAdmin } from "../../hooks/useAdmin";
 import type { AuthorSerializer } from "../../types/author.type";
 import { useTranslation } from "react-i18next";
 const { Title } = Typography;
 
 const AuthorApprovalManagement = () => {
-  const { authors, loading, handleApproval } = useAuthors();
+  const { pendingAuthors, loading, approvalAuthor, loadPendingAuthors } =
+    useAdmin();
   const { t } = useTranslation("author");
+
+  useEffect(() => {
+    loadPendingAuthors();
+  }, [loadPendingAuthors]);
 
   const columns = [
     {
@@ -55,7 +61,7 @@ const AuthorApprovalManagement = () => {
             type="primary"
             icon={<CheckOutlined />}
             onClick={() =>
-              handleApproval(record.id, { isApproved: "approved" })
+              approvalAuthor(record.id, { isApproved: "approved" })
             }
           >
             {t("approve")}
@@ -64,7 +70,7 @@ const AuthorApprovalManagement = () => {
             danger
             icon={<CloseOutlined />}
             onClick={() =>
-              handleApproval(record.id, { isApproved: "rejected" })
+              approvalAuthor(record.id, { isApproved: "rejected" })
             }
           >
             {t("reject")}
@@ -79,7 +85,7 @@ const AuthorApprovalManagement = () => {
       <Title level={3}>{t("authorApprovalManagement")}</Title>
       <Table
         rowKey="id"
-        dataSource={authors}
+        dataSource={pendingAuthors}
         columns={columns}
         loading={loading}
         pagination={{ pageSize: 5 }}
