@@ -95,5 +95,5 @@ const BlogDetailPage = () => {
     </div>
   );
 };
-
 export default BlogDetailPage;
+

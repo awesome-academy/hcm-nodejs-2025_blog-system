@@ -5,7 +5,9 @@
   "backToList": "Quay lại Blog",
   "author": "Tác giả",
   "category": "Danh mục",
-  "tags": "Tags",
+  "tags": "Thẻ",
   "noData": "Không có dữ liệu tác giả",
-  "authorInfo": "Thông tin tác giả"
+  "authorInfo": "Thông tin tác giả",
+  "resetFilters": "Đặt Lại",
+  "titileInput": "Tiêu đề"
 }

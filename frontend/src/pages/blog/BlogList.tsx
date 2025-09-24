@@ -9,6 +9,8 @@ import {
   Avatar,
   Space,
   Pagination,
+  Select,
+  Input,
 } from "antd";
 import {
   UserOutlined,
@@ -23,11 +25,15 @@ import { useTranslation } from "react-i18next";
 import { useAuthor } from "../../hooks/useAuthor";
 import AuthorModal from "../../components/author/authorInfo";
 const { Title, Paragraph, Text } = Typography;
+import { usePosts } from "../../hooks/useAuthorPost";
+import { useAdmin } from "../../hooks/useAdmin";
+const { Option } = Select;
 
 const BlogList = () => {
   const { t } = useTranslation("blog");
   const { loadUserPosts, posts } = useUserPost();
   const { loadAuthorInfo, author, loading } = useAuthor();
+  const { authors, loadAllAuthors } = useAdmin();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [authorModalVisible, setAuthorModalVisible] = useState(false);
@@ -35,9 +41,20 @@ const BlogList = () => {
   const pageSize = 8;
   const navigate = useNavigate();
 
+  const [filter, setFilter] = useState({
+    title: "",
+    authorName: "",
+    categoryName: "",
+    tagName: "",
+    status: "approved",
+  });
+  const { loadTagsAndCategories, tags, categories } = usePosts();
+
   useEffect(() => {
-    loadUserPosts();
-  }, [loadUserPosts]);
+    loadUserPosts(filter);
+    loadTagsAndCategories();
+    loadAllAuthors();
+  }, [loadUserPosts, filter, loadTagsAndCategories, loadAllAuthors]);
 
   // Paginate
   const paginatedPosts = useMemo(() => {
@@ -50,9 +67,80 @@ const BlogList = () => {
     setAuthorModalVisible(true);
   };
 
+  const handleFilterChange = (field: string, value: string) => {
+    setFilter((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
   return (
     <div className="blog-list-container">
       <Title level={2}>{t("title")}</Title>
+
+      <Space style={{ marginBottom: 16 }} className="search-filter-bar" wrap>
+        <Input
+          placeholder={t("titileInput")}
+          value={filter.title}
+          onChange={(e) => handleFilterChange("title", e.target.value)}
+          style={{ width: 300 }}
+        />
+        <Select
+          placeholder={t("author")}
+          value={filter.authorName || undefined}
+          onChange={(val) => handleFilterChange("authorName", val)}
+          style={{ width: 150 }}
+          allowClear
+        >
+          {authors.map((author) => (
+            <Option key={author.id} value={author.penName}>
+              {author.penName}
+            </Option>
+          ))}
+        </Select>
+        <Select
+          placeholder={t("category")}
+          value={filter.categoryName || undefined}
+          onChange={(val) => handleFilterChange("categoryName", val)}
+          style={{ width: 150 }}
+          allowClear
+        >
+          {categories.map((cat) => (
+            <Option key={cat.id} value={cat.name}>
+              {cat.name}
+            </Option>
+          ))}
+        </Select>
+        <Select
+          placeholder={t("tags")}
+          value={filter.tagName || undefined}
+          onChange={(val) => handleFilterChange("tagName", val)}
+          style={{ width: 150 }}
+          allowClear
+        >
+          {tags.map((tag) => (
+            <Option key={tag.id} value={tag.name}>
+              {tag.name}
+            </Option>
+          ))}
+        </Select>
+
+        {/* Nút reset filter */}
+        <Button
+          type="primary"
+          onClick={() =>
+            setFilter({
+              title: "",
+              authorName: "",
+              status: "approved",
+              categoryName: "",
+              tagName: "",
+            })
+          }
+        >
+          {t("resetFilters")}
+        </Button>
+      </Space>
 
       <Row gutter={[24, 24]}>
         {paginatedPosts.map((post) => {

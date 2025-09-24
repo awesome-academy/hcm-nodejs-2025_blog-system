@@ -7,5 +7,7 @@
   "category": "Category",
   "tags": "Tags",
   "noData": "No author data available",
-  "authorInfo": "Author Information"
+  "authorInfo": "Author Information",
+  "resetFilters": "Reset",
+  "titileInput": "Title Input"
 }
