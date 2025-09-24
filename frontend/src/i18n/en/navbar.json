@@ -8,5 +8,7 @@
   "register": "Register",
 
   "manageUsers": "Manage Users",
-  "managePosts": "Manage Posts"
+  "managePosts": "Manage Posts",
+
+  "followedAuthors": "Followed Authors"
 }

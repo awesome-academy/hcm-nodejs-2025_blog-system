@@ -35,4 +35,9 @@ export const ENDPOINTS = {
   AUTHOR: {
     AUTHOR_INFO: (id: number) => `/v1/authors/info/${id}`,
   },
+  FOLLOWER: {
+    FOLLOW_AUTHOR: (authorId: number) => `/v1/followers/follow/${authorId}`,
+    UNFOLLOW_AUTHOR: (authorId: number) => `/v1/followers/unfollow/${authorId}`,
+    GET_FOLLOWED_AUTHORS: "/v1/followers/user",
+  },
 };

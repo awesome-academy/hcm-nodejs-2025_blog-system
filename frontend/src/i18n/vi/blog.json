@@ -9,5 +9,9 @@
   "noData": "Không có dữ liệu tác giả",
   "authorInfo": "Thông tin tác giả",
   "resetFilters": "Đặt Lại",
-  "titileInput": "Tiêu đề"
+  "titileInput": "Tiêu đề",
+  "follow": "Theo dõi",
+  "unfollow": "Bỏ theo dõi",
+  "noFollowedAuthors": "Bạn chưa theo dõi tác giả nào",
+  "followedAuthors": "Tác giả đã theo dõi"
 }

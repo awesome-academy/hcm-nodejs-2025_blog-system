@@ -12,7 +12,6 @@ export const useAuthor = () => {
     setLoading(true);
     try {
       const detail = await getAuthorInfo(id);
-      console.log(detail)
       setAuthor(detail || null);
     } catch (err) {
       toast.error((err as Error).message);
@@ -27,4 +26,3 @@ export const useAuthor = () => {
     loadAuthorInfo,
   };
 };
-

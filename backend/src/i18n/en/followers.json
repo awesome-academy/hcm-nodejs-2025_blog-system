@@ -1,0 +1,10 @@
+{
+  "user_or_author_not_found": "User or Author not found",
+  "already_follow": "You already follow this author",
+  "follow_failed": "Failed to follow author",
+  "follower_not_found": "Follower record not found",
+  "unfollow_failed": "Failed to unfollow author",
+  "fetch_followed_authors_failed": "Failed to fetch followed authors",
+  "fetch_followers_failed": "Failed to fetch followers",
+  "unfollow_success": "Successfully unfollowed the author."
+}

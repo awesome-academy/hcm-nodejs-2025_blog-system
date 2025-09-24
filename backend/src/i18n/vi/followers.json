@@ -1,0 +1,10 @@
+{
+  "user_or_author_not_found": "Người dùng hoặc tác giả không tồn tại",
+  "already_follow": "Bạn đã theo dõi tác giả này rồi",
+  "follow_failed": "Theo dõi tác giả thất bại",
+  "follower_not_found": "Bản ghi theo dõi không tồn tại",
+  "unfollow_failed": "Hủy theo dõi tác giả thất bại",
+  "fetch_followed_authors_failed": "Lấy danh sách tác giả đang theo dõi thất bại",
+  "fetch_followers_failed": "Lấy danh sách người theo dõi thất bại",
+  "unfollow_success": "Đã hủy theo dõi tác giả thành công."
+}
