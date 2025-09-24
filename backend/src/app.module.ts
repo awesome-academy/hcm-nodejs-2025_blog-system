@@ -28,6 +28,7 @@ import { PostModule } from './modules/posts/post.module';
 import { TagModule } from './modules/tags/tag.module';
 import { CategoryModule } from './modules/categories/category.module';
 import { AdminModule } from './modules/admin/admin.module';
+import { FollowersModule } from './modules/followers/follower.module';
 
 @Module({
   imports: [
@@ -59,6 +60,7 @@ import { AdminModule } from './modules/admin/admin.module';
     TagModule,
     CategoryModule,
     AdminModule,
+    FollowersModule,
   ],
   controllers: [AppController],
   providers: [
