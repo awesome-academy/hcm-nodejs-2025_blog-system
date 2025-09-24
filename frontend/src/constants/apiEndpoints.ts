@@ -15,6 +15,8 @@ export const ENDPOINTS = {
     UPDATE: (postId: number) => `/v1/posts/update/${postId}`,
     SOFT_DELETE: (postId: number) => `/v1/posts/softDelete/${postId}`,
     AUTHOR_LIST: "/v1/posts/authorPost",
+    USER_LIST: "/v1/posts/postUser",
+    POST_DETAIL: (postId: number) => `v1/posts/postUserDetail/${postId}`,
   },
   TAGS: {
     LIST: "/v1/tags/list",
@@ -29,5 +31,8 @@ export const ENDPOINTS = {
     APPROVE_POST: (postId: number) => `/v1/admin/approvalPost/${postId}`,
     LIST_AUTHORS: "/v1/admin/allAuthor",
     POST_DETAIL: (postId: number) => `v1/admin/postDetail/${postId}`,
+  },
+  AUTHOR: {
+    AUTHOR_INFO: (id: number) => `/v1/authors/info/${id}`,
   },
 };

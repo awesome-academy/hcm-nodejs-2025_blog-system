@@ -8,24 +8,18 @@
 
 html {
   height: 100%;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-html::-webkit-scrollbar {
-  display: none;
+  overflow-y: scroll;
 }
 
 body {
   height: 100%;
   margin: 0;
   background-color: #f2f2f2;
-  -webkit-overflow-scrolling: touch;
-  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch; 
 }
 
 #root {
-  min-height: 100vh; /* full màn hình và căn giữa */
+  min-height: 100vh; 
   display: flex;
   justify-content: center;
   align-items: center;

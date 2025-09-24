@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository, InjectDataSource } from '@nestjs/typeorm';
 import { Repository, DataSource, EntityManager, IsNull } from 'typeorm';
-import { Post } from './entities/post.entity';
+import { Post, PostStatus } from './entities/post.entity';
 import { Category } from '@/modules/categories/entities/category.entity';
 import { Tag } from '@/modules/tags/entities/tag.entity';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -21,6 +21,7 @@ import { AuthorService } from '../authors/author.service';
 import { CategoryService } from '../categories/category.service';
 import { TagService } from '../tags/tag.service';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { FilterPostDto } from './dto/filter-post.dto';
 
 @Injectable()
 export class PostService extends BaseI18nService {
@@ -279,6 +280,63 @@ export class PostService extends BaseI18nService {
       );
     } finally {
       await queryRunner.release();
+    }
+  }
+
+  async getAllPosts(filter: FilterPostDto): Promise<PostSerializer[]> {
+    try {
+      const query = this.postRepo
+        .createQueryBuilder('post')
+        .leftJoinAndSelect('post.author', 'author')
+        .leftJoinAndSelect('post.category', 'category')
+        .leftJoinAndSelect('post.tags', 'tags')
+        .where('post.deletedAt IS NULL')
+        .andWhere('post.status = :status', { status: PostStatus.APPROVED })
+        .orderBy('post.createdAt', 'DESC');
+
+      // Map các filter field sang column và value
+      const filterMap: Record<string, { column: string; value?: string }> = {
+        title: { column: 'post.title', value: filter.title },
+        authorName: { column: 'author.penName', value: filter.authorName },
+        categoryName: { column: 'category.name', value: filter.categoryName },
+        tagName: { column: 'tags.name', value: filter.tagName },
+      };
+
+      // Loop qua filterMap và thêm dynamic AND WHERE
+      Object.entries(filterMap).forEach(([key, { column, value }]) => {
+        if (value) {
+          query.andWhere(`${column} LIKE :${key}`, { [key]: `%${value}%` });
+        }
+      });
+
+      const posts = await query.getMany();
+
+      return plainToInstance(PostSerializer, posts, {
+        excludeExtraneousValues: true,
+      });
+    } catch (error) {
+      console.error(error);
+      throw new InternalServerErrorException(await this.t('post.fetch_failed'));
+    }
+  }
+
+  async getPostDetail(postId: number): Promise<PostSerializer> {
+    try {
+      const post = await this.postRepo.findOne({
+        where: { id: postId, deletedAt: IsNull(), status: PostStatus.APPROVED },
+        relations: ['author', 'category', 'tags'],
+      });
+
+      if (!post) {
+        throw new NotFoundException(await this.t('post.not_found'));
+      }
+
+      return plainToInstance(PostSerializer, post, {
+        excludeExtraneousValues: true,
+      });
+    } catch (error) {
+      if (error instanceof NotFoundException) throw error;
+      throw new InternalServerErrorException(await this.t('post.fetch_failed'));
     }
   }
 }
