@@ -21,17 +21,18 @@ import { PostSerializer } from '../posts/serializers/post.serializer';
 import { FilterPostDto } from '../posts/dto/filter-post.dto';
 
 @ApiTags('Admin')
-@UseGuards(JwtAuthGuard)
 @Controller('admin')
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get('listAuthor')
   @ApiResponseData(AuthorSerializer, true)
   async getPendingAuthors() {
     return this.adminService.getPendingAuthors();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id/approvalAuthor')
   @ApiBody({ type: ApprovalAuthorDto })
   @ApiResponseData(MessageResponseDto)
@@ -42,6 +43,7 @@ export class AdminController {
     return this.adminService.approvalAuthor(id, dto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('approvalPost/:id')
   @ApiBody({ type: ApprovalPostDto })
   @ApiResponseData(MessageResponseDto)
@@ -55,6 +57,7 @@ export class AdminController {
     return this.adminService.getAllAuthors();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('listPost')
   @ApiResponseData(PostSerializer, true)
   async getAllPosts(@Query() filter: FilterPostDto): Promise<PostSerializer[]> {
