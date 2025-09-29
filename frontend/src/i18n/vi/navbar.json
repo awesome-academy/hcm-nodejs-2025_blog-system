@@ -8,5 +8,7 @@
   "register": "Đăng ký",
 
   "manageUsers": "Quản lý người dùng",
-  "managePosts": "Quản lý bài viết"
+  "managePosts": "Quản lý bài viết",
+
+  "followedAuthors": "Tác giả đã theo dõi"
 }

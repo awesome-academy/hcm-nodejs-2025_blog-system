@@ -9,5 +9,9 @@
   "noData": "No author data available",
   "authorInfo": "Author Information",
   "resetFilters": "Reset",
-  "titileInput": "Title Input"
+  "titileInput": "Title Input",
+  "follow": "Follow",
+  "unfollow": "Unfollow",
+  "noFollowedAuthors": "You haven't followed any authors yet",
+  "followedAuthors": "Followed Authors"
 }
